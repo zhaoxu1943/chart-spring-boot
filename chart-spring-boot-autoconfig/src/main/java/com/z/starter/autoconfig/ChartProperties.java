@@ -18,4 +18,7 @@ public class ChartProperties {
      * whether enable chart starter
      */
     private boolean enable = true;
+
+
+    private Integer pageId = 1;
 }

@@ -11,5 +11,12 @@
 
     <artifactId>chart-spring-boot-starter</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.z</groupId>
+            <artifactId>chart-spring-boot-autoconfig</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
