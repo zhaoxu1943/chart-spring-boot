@@ -2,16 +2,14 @@ package com.z.starter.autoconfig.service;
 
 import com.z.starter.autoconfig.ChartProperties;
 import com.z.starter.autoconfig.model.Page;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
-
+@Service
 public class PageServiceImpl implements PageService {
 
 
     private final ChartProperties chartProperties;
+
 
     //construct inject
     public PageServiceImpl(ChartProperties chartProperties) {
@@ -22,7 +20,7 @@ public class PageServiceImpl implements PageService {
     @Override
     public Page getPageInfo() {
         Page page = new Page();
-        page.setId(chartProperties.getPageId());
+        page.setPageId(chartProperties.getPageId());
         return page;
     }
 }

@@ -2,7 +2,7 @@ package com.z.starter.autoconfig.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author zhaoxu
@@ -10,26 +10,30 @@ import javax.persistence.*;
  * @since
  */
 @Data
-@Entity
-@Table(name="plguin_page")
 public class Page {
+
+    public Page() {
+    }
+
+    public Page(String pageId, String pageName, List<Card> cardList) {
+        this.pageId = pageId;
+        this.pageName = pageName;
+        this.cardList = cardList;
+    }
 
     /**
      * primary key
      * using database autoincrement
      * @author zhaoxu
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String pageId;
 
     /**
      * page name
      * @author zhaoxu
      */
-    @Column()
     private String pageName;
 
-
+    private List<Card> cardList;
 
 }

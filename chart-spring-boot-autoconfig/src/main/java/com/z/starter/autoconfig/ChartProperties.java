@@ -20,5 +20,5 @@ public class ChartProperties {
     private boolean enable = true;
 
 
-    private Integer pageId = 1;
+    private String pageId = "test";
 }

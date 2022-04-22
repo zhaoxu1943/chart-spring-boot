@@ -2,18 +2,26 @@ package com.z.starter.autoconfig.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.Collection;
-
 /**
  * @author zhaoxu
  * @date 2022/4/21 16:56
  * @since
  */
 @Data
-@Entity
-@Table(name="plguin_card")
+
 public class Card {
+
+
+    public Card(String cardId, Integer span, Integer offset) {
+        this.cardId = cardId;
+        this.span = span;
+        this.offset = offset;
+    }
+
+    public Card(Integer span, Integer offset) {
+        this.span = span;
+        this.offset = offset;
+    }
 
 
     /**
@@ -21,17 +29,11 @@ public class Card {
      * using database autoincrement
      * @author zhaoxu
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String cardId;
 
-    @Column()
     private Integer span;
 
-    @Column()
     private Integer offset;
-
-
 
 
 }

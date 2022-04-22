@@ -1,12 +1,14 @@
 package com.z.starter.autoconfig;
 
-import com.z.starter.autoconfig.service.PageService;
-import com.z.starter.autoconfig.service.PageServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+
+import javax.sql.DataSource;
 
 /**
  * @author zhaoxu
@@ -15,17 +17,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @EnableConfigurationProperties(ChartProperties.class)
+@ComponentScan()
 public class ChartAutoConfiguration {
 
-    private final ChartProperties chartProperties;
-
-    public ChartAutoConfiguration(ChartProperties chartProperties) {
-        this.chartProperties = chartProperties;
-    }
-
-
-        @Bean
-        public PageService pageService(){
-            return new PageServiceImpl(chartProperties);
-        }
 }

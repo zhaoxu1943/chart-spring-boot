@@ -6,13 +6,17 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
+ * page/card focus on page structure
+ * model chart has N-N relation with Card
+ * it means that a card can place any chart
+ * the same chart can be placed on different cards
+ *
  * @author zhaoxu
  * @date 2022/4/21 16:57
  * @since
  */
 @Data
 @Entity
-@Table(name="plguin_chart")
 public class Chart {
 
 
