@@ -1,7 +1,13 @@
-package com.z.starter.autoconfig.model;
+package com.z.starter.autoconfig.model.po;
 
+import com.z.starter.autoconfig.model.po.Card;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,16 +16,10 @@ import java.util.List;
  * @since
  */
 @Data
-public class Page {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Page implements Serializable {
 
-    public Page() {
-    }
-
-    public Page(String pageId, String pageName, List<Card> cardList) {
-        this.pageId = pageId;
-        this.pageName = pageName;
-        this.cardList = cardList;
-    }
 
     /**
      * primary key
@@ -34,6 +34,7 @@ public class Page {
      */
     private String pageName;
 
+    @OneToMany
     private List<Card> cardList;
 
 }

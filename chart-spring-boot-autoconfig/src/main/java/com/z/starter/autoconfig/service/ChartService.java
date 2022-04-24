@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2022/4/22 14:06
  * @since
  */
-public interface DataBaseService {
+public interface ChartService {
 
     List<Entity> query() throws SQLException;
 

@@ -1,14 +1,13 @@
-package com.z.starter.autoconfig.service;
+package com.z.starter.autoconfig.service.impl;
 
-import ch.qos.logback.classic.db.names.DBNameResolver;
 import cn.hutool.db.Db;
 import cn.hutool.db.DbUtil;
 import cn.hutool.db.Entity;
+import com.z.starter.autoconfig.service.ChartService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
  * @since
  */
 @Service
-public class DataBaseServiceImpl implements DataBaseService {
+public class ChartServiceImpl implements ChartService {
 
     @Resource
     DataSource dataSource;

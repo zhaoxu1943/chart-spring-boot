@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>chart-spring-boot-samples</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>chart-spring-boot-samples</name>
     <description>chart-spring-boot-samples</description>
     <properties>
@@ -31,7 +31,7 @@
         <dependency>
                 <groupId>com.z</groupId>
                 <artifactId>chart-spring-boot-starter</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.0.2</version>
         </dependency>
 
     </dependencies>

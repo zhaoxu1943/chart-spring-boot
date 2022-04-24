@@ -1,14 +1,9 @@
 package com.z.starter.autoconfig;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import com.z.starter.autoconfig.config.ChartProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
 
 /**
  * @author zhaoxu

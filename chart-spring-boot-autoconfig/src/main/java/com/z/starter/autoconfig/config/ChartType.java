@@ -1,4 +1,4 @@
-package com.z.starter.autoconfig;
+package com.z.starter.autoconfig.config;
 
 /**
  * @author zhaoxu

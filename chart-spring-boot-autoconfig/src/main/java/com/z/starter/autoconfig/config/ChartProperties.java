@@ -1,4 +1,4 @@
-package com.z.starter.autoconfig;
+package com.z.starter.autoconfig.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

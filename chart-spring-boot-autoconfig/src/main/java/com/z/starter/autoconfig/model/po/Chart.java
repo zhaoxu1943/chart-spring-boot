@@ -1,9 +1,12 @@
-package com.z.starter.autoconfig.model;
+package com.z.starter.autoconfig.model.po;
 
-import com.z.starter.autoconfig.ChartType;
+import com.z.starter.autoconfig.config.ChartType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * page/card focus on page structure
@@ -16,8 +19,9 @@ import javax.persistence.*;
  * @since
  */
 @Data
-@Entity
-public class Chart {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Chart implements Serializable {
 
 
     /**
@@ -25,14 +29,10 @@ public class Chart {
      * using database autoincrement
      * @author zhaoxu
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column()
     private Integer cardId;
 
-    @Column()
     private ChartType chartType;
 
     /**
