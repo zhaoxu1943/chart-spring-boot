@@ -1,6 +1,7 @@
 package com.z.starter.autoconfig.service;
 
 import cn.hutool.db.Entity;
+import com.z.starter.autoconfig.po.Chart;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -12,6 +13,6 @@ import java.util.List;
  */
 public interface ChartService {
 
-    List<Entity> query() throws SQLException;
 
+    void createChartsForCardByCardId(Long cardId, List<Chart> chartList);
 }

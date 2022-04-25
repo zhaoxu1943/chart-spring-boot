@@ -3,6 +3,8 @@ package com.z.starter.autoconfig.service.impl;
 import cn.hutool.db.Db;
 import cn.hutool.db.DbUtil;
 import cn.hutool.db.Entity;
+import com.z.starter.autoconfig.po.Chart;
+import com.z.starter.autoconfig.repository.ChartRepository;
 import com.z.starter.autoconfig.service.ChartService;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +22,12 @@ import java.util.List;
 public class ChartServiceImpl implements ChartService {
 
     @Resource
-    DataSource dataSource;
+    ChartRepository chartRepository;
+
 
     @Override
-    public List<Entity> query() throws SQLException {
-        Db db = DbUtil.use(dataSource);
-        List<Entity> list =db.query("select 1 from dual");
-        System.out.println(list);
-        return list;
+    public void createChartsForCardByCardId(Long cardId, List<Chart> chartList) {
+
+
     }
-
-
-
 }

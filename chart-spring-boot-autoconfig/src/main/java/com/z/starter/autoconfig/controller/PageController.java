@@ -50,7 +50,7 @@ public class PageController {
      * @author zhaoxu
      */
     @PostMapping("/create")
-    public ResultDTO<Page> createPage(@RequestBody PageCardDTO pageCardDTO) throws SQLException {
+    public ResultDTO<Page> createPage(@RequestBody PageCardDTO pageCardDTO){
         return  ResultGenerator.genSuccessResult(pageService.createPage(pageCardDTO));
     }
 

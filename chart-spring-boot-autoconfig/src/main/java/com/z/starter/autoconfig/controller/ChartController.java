@@ -1,8 +1,12 @@
 package com.z.starter.autoconfig.controller;
 
+import com.z.starter.autoconfig.dto.ResultDTO;
 import com.z.starter.autoconfig.po.Card;
+import com.z.starter.autoconfig.po.Chart;
+import com.z.starter.autoconfig.service.ChartService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -14,10 +18,13 @@ import java.util.List;
 @RequestMapping("/chart-info")
 public class ChartController {
 
+    @Resource
+    ChartService chartService;
 
-    @PostMapping("/list")
-    public List<Card> getCardInfo(@RequestBody List<String> cardIdList){
-        return null;
+    @PostMapping("/create-charts-for-card-by-card-id/card-id/{cardId}")
+    public ResultDTO createChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Chart> chartList){
+            return null;
+            //        chartService.createChartsForCardByCardId(cardId,chartList);
     }
 
 
