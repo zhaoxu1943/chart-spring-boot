@@ -1,6 +1,6 @@
 package com.z.starter.autoconfig.controller;
 
-import com.z.starter.autoconfig.model.po.Card;
+import com.z.starter.autoconfig.po.Card;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

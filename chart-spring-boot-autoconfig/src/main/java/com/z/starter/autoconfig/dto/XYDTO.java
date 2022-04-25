@@ -1,4 +1,4 @@
-package com.z.starter.autoconfig.model.dto;
+package com.z.starter.autoconfig.dto;
 
 import lombok.Data;
 

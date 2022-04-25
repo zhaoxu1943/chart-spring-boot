@@ -1,6 +1,6 @@
 package com.z.starter.autoconfig.config;
 
-import com.z.starter.autoconfig.model.dto.ResultDTO;
+import com.z.starter.autoconfig.dto.ResultDTO;
 
 /**
  * 响应结果生成工具

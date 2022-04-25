@@ -1,4 +1,4 @@
-package com.z.starter.autoconfig.model.dto;
+package com.z.starter.autoconfig.dto;
 
 import cn.hutool.json.JSONUtil;
 import com.z.starter.autoconfig.config.ResultCode;
