@@ -1,5 +1,6 @@
 package com.z.starter.autoconfig.controller;
 
+import com.z.starter.autoconfig.config.ResultGenerator;
 import com.z.starter.autoconfig.dto.ResultDTO;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Chart;
@@ -22,9 +23,9 @@ public class ChartController {
     ChartService chartService;
 
     @PostMapping("/create-charts-for-card-by-card-id/card-id/{cardId}")
-    public ResultDTO createChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Chart> chartList){
-            return null;
-            //        chartService.createChartsForCardByCardId(cardId,chartList);
+    public ResultDTO<Card> createChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Chart> chartList){
+            return ResultGenerator.genSuccessResult( chartService.createChartsForCardByCardId(cardId,chartList));
+
     }
 
 

@@ -30,7 +30,8 @@ public class Page extends BaseEntity implements Serializable {
     @Column()
     private String name;
 
-    @OneToMany
+    @OneToMany(targetEntity = Card.class,cascade = CascadeType.ALL)
+    @JoinTable(name = "plg_relation_page_card",joinColumns = "card_id")
     private List<Card> cards;
 
 

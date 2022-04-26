@@ -28,6 +28,9 @@ import java.util.List;
 @Accessors(chain = true)
 public class Card extends BaseEntity implements Serializable {
 
+    @Column(nullable = false)
+    private Long defaultChartId;
+
     @Column()
     private String title;
 
@@ -37,8 +40,11 @@ public class Card extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private Integer offset;
 
-    @ManyToMany
-    @JoinTable(name = "plg_relation_card_chart")
+
+
+
+    @ManyToMany(cascade = )
+    @JoinTable(name = "plg_relation_card_chart",joinColumns = "chard_id")
     private List<Chart> charts;
 
 }
