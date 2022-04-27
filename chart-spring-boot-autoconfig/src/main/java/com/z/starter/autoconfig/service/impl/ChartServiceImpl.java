@@ -57,7 +57,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
 
 
     @Override
-    public List<Chart> getChartConfigDataByCardId(List<Long> chartIdList) {
+    public List<Chart> getChartConfigDataByChartId(List<Long> chartIdList) {
             return chartRepository.findAllById(chartIdList);
     }
 

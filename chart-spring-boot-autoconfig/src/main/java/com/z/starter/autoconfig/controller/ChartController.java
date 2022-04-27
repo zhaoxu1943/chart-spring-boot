@@ -5,6 +5,7 @@ import com.z.starter.autoconfig.dto.ResultDTO;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Chart;
 import com.z.starter.autoconfig.service.ChartService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,8 +30,8 @@ public class ChartController {
     }
 
     @PostMapping("/get-chart-config-data")
-    public ResultDTO<List<Chart>> getChartConfigDataByCardId(@RequestBody List<Long> chartIdList){
-        List<Chart> chartList = chartService.getChartConfigDataByCardId(chartIdList);
+    public ResultDTO<List<Chart>> getChartConfigDataByChartId(@RequestBody List<Long> chartIdList){
+        List<Chart> chartList = chartService.getChartConfigDataByChartId(chartIdList);
         chartService.dataInject(chartList);
         return ResultGenerator.genSuccessResult(chartList);
 

@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +33,12 @@ public class Chart extends BaseEntity implements Serializable {
     @Column()
     private ChartType type;
 
+    @Column
+    private String xAxisName;
+
+    @Column
+    private String yAxisName;
+
     /**
      * data bind to the chart object
      */
@@ -41,11 +48,7 @@ public class Chart extends BaseEntity implements Serializable {
 
 
     @Transient
-    private Map<String, XYDTO> data;
-
-
-
-
+    private Map<String, List<XYDTO>> data;
 
 
 }

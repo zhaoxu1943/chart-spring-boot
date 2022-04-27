@@ -1,7 +1,7 @@
 package com.z.starter.autoconfig.core;
 
 import com.z.starter.autoconfig.dto.XYDTO;
-
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,5 +11,5 @@ import java.util.Map;
  */
 public interface DataInject {
 
-    Map<String, XYDTO> inject();
+    Map<String, List<XYDTO>> inject();
 }

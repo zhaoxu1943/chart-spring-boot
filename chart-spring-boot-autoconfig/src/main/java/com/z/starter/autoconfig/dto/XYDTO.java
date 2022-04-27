@@ -1,6 +1,7 @@
 package com.z.starter.autoconfig.dto;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author zhaoxu
@@ -8,6 +9,11 @@ import lombok.Data;
  * @since
  */
 @Data
+@Accessors(chain = true)
 public class XYDTO {
+
+    private String name;
+
+    private String value;
 
 }
