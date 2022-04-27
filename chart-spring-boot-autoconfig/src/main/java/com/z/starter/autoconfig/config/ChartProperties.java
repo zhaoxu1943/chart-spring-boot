@@ -14,11 +14,4 @@ public class ChartProperties {
 
     public static final String CHART_PREFIX = "chart";
 
-    /**
-     * whether enable chart starter
-     */
-    private boolean enable = true;
-
-
-    private String pageId = "test";
 }

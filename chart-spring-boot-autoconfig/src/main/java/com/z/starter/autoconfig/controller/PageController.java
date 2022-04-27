@@ -8,11 +8,10 @@ import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Page;
 import com.z.starter.autoconfig.repository.PageRepository;
 import com.z.starter.autoconfig.service.PageService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
-import java.util.List;
 
 /**
  * @author zhaoxu
@@ -35,6 +34,7 @@ public class PageController {
      * @return Page
      * @author zhaoxu
      */
+    @Operation(summary = "get page info by page name")
     @GetMapping("/page-name/{pageName}")
     public Page getPageInfo(@PathVariable String pageName){
         return pageService.getPageInfo(pageName);
@@ -49,6 +49,7 @@ public class PageController {
      * @return Page
      * @author zhaoxu
      */
+    @Operation(summary = "create page by pageCardDTO")
     @PostMapping("/create")
     public ResultDTO<Page> createPage(@RequestBody PageCardDTO pageCardDTO){
         return  ResultGenerator.genSuccessResult(pageService.createPage(pageCardDTO));
