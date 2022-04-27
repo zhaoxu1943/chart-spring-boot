@@ -5,23 +5,24 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.z.starter.autoconfig.core.DataInject;
 import com.z.starter.autoconfig.dto.XYDTO;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author zhaoxu
- * @date 2022/4/27 11:09
+ * @date 2022/4/27 13:40
  * @since
  */
-@Component(value = "testBean")
-public class TestChart implements DataInject {
+@Configuration
+public class ChartDataConfig {
 
-
-    @Override
-    public Map<String, List<XYDTO>> inject() {
-        //mock Data
-        return MockUtil.getMockMap();
+    @Bean(name = "testBean2")
+    public DataInject testChartData(){
+        return MockUtil::getMockMap;
     }
+
+
 }

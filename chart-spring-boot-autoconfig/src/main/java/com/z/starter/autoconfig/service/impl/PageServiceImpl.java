@@ -41,7 +41,7 @@ public class PageServiceImpl implements PageService {
             Integer cardOffset = pageCardDTO.getCardOffset();
             if (cardSpan!=null&&cardOffset!=null&&cardSpan>0&&cardOffset>=0){
                 for (int i = 0; i < cardNumber; i++) {
-                    cardList.add(new Card().setSpan(cardSpan).setOffset(cardOffset));
+                    cardList.add(new Card().setSpan(cardSpan).setCardOffset(cardOffset));
                     cardRepository.saveAll(cardList);
                 }
             }

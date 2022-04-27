@@ -17,8 +17,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //IOC
 @ComponentScan()
 //JPA
-@EntityScan()
-@EnableJpaRepositories
+@EntityScan("com.z.starter.autoconfig.po")
+@EnableJpaRepositories("com.z.starter.autoconfig.repository")
 public class ChartAutoConfiguration {
 
 }

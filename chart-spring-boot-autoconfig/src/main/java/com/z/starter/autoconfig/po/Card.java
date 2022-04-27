@@ -38,7 +38,7 @@ public class Card extends BaseEntity implements Serializable {
     private Integer span;
 
     @Column(nullable = false)
-    private Integer offset;
+    private Integer cardOffset;
 
     @ManyToMany(targetEntity = Chart.class,cascade = CascadeType.ALL)
     @JoinTable(name = "plg_relation_card_chart",
