@@ -28,7 +28,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class Card extends BaseEntity implements Serializable {
 
-    @Column(nullable = false)
+    @Column()
     private Long defaultChartId;
 
     @Column()
@@ -40,11 +40,10 @@ public class Card extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private Integer offset;
 
-
-
-
-    @ManyToMany(cascade = )
-    @JoinTable(name = "plg_relation_card_chart",joinColumns = "chard_id")
+    @ManyToMany(targetEntity = Chart.class,cascade = CascadeType.ALL)
+    @JoinTable(name = "plg_relation_card_chart",
+            joinColumns = {@JoinColumn(name = "card_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="chart_id",referencedColumnName = "id")})
     private List<Chart> charts;
 
 }

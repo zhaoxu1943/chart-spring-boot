@@ -1,5 +1,6 @@
 package com.z.starter.autoconfig.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -10,7 +11,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @since
  */
 @NoRepositoryBean
-public interface BaseRepository<T,Long> extends PagingAndSortingRepository<T,Long>, CrudRepository<T,Long> {
+public interface BaseRepository<T,Long> extends JpaRepository<T,Long> {
 
 
 

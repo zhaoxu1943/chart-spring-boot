@@ -24,9 +24,15 @@ public class ChartController {
 
     @PostMapping("/create-charts-for-card-by-card-id/card-id/{cardId}")
     public ResultDTO<Card> createChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Chart> chartList){
-            return ResultGenerator.genSuccessResult( chartService.createChartsForCardByCardId(cardId,chartList));
+            return ResultGenerator.genSuccessResult(chartService.createChartsForCardByCardId(cardId,chartList));
 
     }
 
+    @PostMapping("/get-chart-config-data")
+    public ResultDTO<List<Chart>> getChartConfigDataByCardId(@RequestBody List<Long> chartIdList){
+        List<Chart> chartList = chartService.getChartConfigDataByCardId(chartIdList);
+        chartService.dataInject(chartList);
+        return ResultGenerator.genSuccessResult(chartList);
 
+    }
 }

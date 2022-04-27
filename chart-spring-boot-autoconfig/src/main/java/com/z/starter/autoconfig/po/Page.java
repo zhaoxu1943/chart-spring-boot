@@ -31,7 +31,9 @@ public class Page extends BaseEntity implements Serializable {
     private String name;
 
     @OneToMany(targetEntity = Card.class,cascade = CascadeType.ALL)
-    @JoinTable(name = "plg_relation_page_card",joinColumns = "card_id")
+    @JoinTable(name = "plg_relation_page_card",
+            joinColumns = {@JoinColumn(name = "page_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="card_id",referencedColumnName = "id")})
     private List<Card> cards;
 
 

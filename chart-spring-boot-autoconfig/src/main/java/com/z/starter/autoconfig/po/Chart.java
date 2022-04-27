@@ -36,6 +36,10 @@ public class Chart extends BaseEntity implements Serializable {
      * data bind to the chart object
      */
 
+    @Column()
+    private String beanName;
+
+
     @Transient
     private Map<String, XYDTO> data;
 

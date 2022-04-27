@@ -16,4 +16,8 @@ public interface ChartService {
 
 
     Card createChartsForCardByCardId(Long cardId, List<Chart> chartList);
+
+    List<Chart> getChartConfigDataByCardId(List<Long> chartIdList);
+
+    void dataInject(List<Chart> chartList);
 }
