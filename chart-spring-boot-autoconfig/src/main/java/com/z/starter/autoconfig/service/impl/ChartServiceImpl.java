@@ -16,6 +16,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -44,6 +45,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
     }
 
     @Override
+    @Transactional
     public Card createChartsForCardByCardId(Long cardId, List<Chart> chartList) {
         Optional<Card> cardOption = cardRepository.findById(cardId);
         if (cardOption.isPresent()){

@@ -13,6 +13,8 @@ import com.z.starter.autoconfig.repository.CardRepository;
 import com.z.starter.autoconfig.repository.PageRepository;
 import com.z.starter.autoconfig.service.PageService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,6 +31,7 @@ public class PageServiceImpl implements PageService {
 
 
     @Override
+    @Transactional
     public Page createPage(PageCardDTO pageCardDTO)  {
         if (pageCardDTO==null){
             throw new ChartException("PageCardDTO is null Object,cant create page");
