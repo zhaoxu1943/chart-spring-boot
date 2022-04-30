@@ -30,7 +30,7 @@ public class Page extends BaseEntity implements Serializable {
     @Column()
     private String name;
 
-    @OneToMany(targetEntity = Card.class,cascade = CascadeType.MERGE)
+    @OneToMany(targetEntity = Card.class,cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(name = "plg_relation_page_card",
             joinColumns = {@JoinColumn(name = "page_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="card_id",referencedColumnName = "id")})

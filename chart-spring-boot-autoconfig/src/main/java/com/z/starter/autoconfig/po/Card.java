@@ -40,7 +40,7 @@ public class Card extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private Integer cardOffset;
 
-    @ManyToMany(targetEntity = Chart.class,cascade = CascadeType.MERGE)
+    @ManyToMany(targetEntity = Chart.class,cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(name = "plg_relation_card_chart",
             joinColumns = {@JoinColumn(name = "card_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="chart_id",referencedColumnName = "id")})
