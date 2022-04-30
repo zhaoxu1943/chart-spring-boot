@@ -26,8 +26,10 @@ import java.util.List;
 @Accessors(chain = true)
 public class Page extends BaseEntity implements Serializable {
 
+    @Column
+    private Integer numberOfCutPage;
 
-    @Column()
+    @Column
     private String name;
 
     @OneToMany(targetEntity = Card.class,cascade = CascadeType.MERGE)

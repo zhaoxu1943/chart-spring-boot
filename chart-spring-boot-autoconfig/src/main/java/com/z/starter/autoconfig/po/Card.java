@@ -28,11 +28,14 @@ import java.util.List;
 @Accessors(chain = true)
 public class Card extends BaseEntity implements Serializable {
 
-    @Column()
+    @Column
     private Long defaultChartId;
 
-    @Column()
+    @Column
     private String title;
+
+    @Column
+    private Integer cardOrder;
 
     @Column(nullable = false)
     private Integer span;

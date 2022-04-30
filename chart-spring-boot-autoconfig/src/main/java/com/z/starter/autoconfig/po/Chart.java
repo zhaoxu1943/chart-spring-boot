@@ -30,7 +30,10 @@ import java.util.Map;
 public class Chart extends BaseEntity implements Serializable {
 
 
-    @Column()
+    @Column
+    private String title;
+
+    @Column
     private ChartType type;
 
     @Column
