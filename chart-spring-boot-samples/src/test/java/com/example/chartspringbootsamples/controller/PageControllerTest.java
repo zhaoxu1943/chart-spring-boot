@@ -1,21 +1,14 @@
 package com.example.chartspringbootsamples.controller;
 
-import com.z.starter.autoconfig.dto.PageCardDTO;
-import com.z.starter.autoconfig.dto.ResultDTO;
-import com.z.starter.autoconfig.po.Page;
-import net.bytebuddy.asm.Advice;
+import com.z.starter.autoconfig.dto.PageCardQuery;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -49,8 +42,8 @@ public class PageControllerTest {
     public void createPageShouldReturnPageObj() throws Exception{
 
 
-        //RequsetBody
-        HttpEntity<PageCardDTO> request = new HttpEntity<>(new PageCardDTO().setPageName("alarm").setCardNumber(6).setCardOffset(1).setCardSpan(8));
+        //RequestBody
+        HttpEntity<PageCardQuery> request = new HttpEntity<>(new PageCardQuery().setPageName("alarm").setCardNumber(6).setCardOffset(1).setCardSpan(8));
 
         String json =  this.testRestTemplate.postForObject("http://localhost:"+port+"/page-info/create",request,
                 String.class);

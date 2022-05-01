@@ -1,15 +1,16 @@
 package com.z.starter.autoconfig.core;
 
-import com.z.starter.autoconfig.dto.XYDTO;
-import java.util.List;
+import com.z.starter.autoconfig.dto.ChartQuery;
+
 import java.util.Map;
 
 /**
+ * inject data to chart
  * @author zhaoxu
  * @date 2022/4/27 10:54
  * @since
  */
-public interface DataInject {
+public interface DataInject<T extends BaseData> {
 
-    Map<String, List<XYDTO>> inject();
+    T injectWithQuery(ChartQuery chartQuery);
 }

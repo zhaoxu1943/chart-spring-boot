@@ -1,6 +1,7 @@
 package com.z.starter.autoconfig.controller;
 
 import com.z.starter.autoconfig.config.ResultGenerator;
+import com.z.starter.autoconfig.dto.ChartQuery;
 import com.z.starter.autoconfig.dto.ResultDTO;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Chart;
@@ -31,11 +32,10 @@ public class ChartController {
 
     }
 
-    @Operation(summary = "get chart config data by chart id")
+    @Operation(summary = "get chart config data by ChartQuery obj ")
     @PostMapping("/get-chart-config-data")
-    public ResultDTO<List<Chart>> getChartConfigDataByChartId(@RequestBody List<Long> chartIdList){
-        List<Chart> chartList = chartService.getChartConfigDataByChartId(chartIdList);
-        chartService.dataInject(chartList);
+    public ResultDTO<List<Chart>> getChartConfigDataByChartQuery(@RequestBody List<ChartQuery> chartQueryList){
+        List<Chart> chartList = chartService.getChartConfigDataByChartQuery(chartQueryList);
         return ResultGenerator.genSuccessResult(chartList);
 
     }

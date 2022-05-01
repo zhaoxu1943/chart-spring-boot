@@ -1,14 +1,14 @@
 package com.example.chartspringbootsamples.chartdata;
 
 import com.example.chartspringbootsamples.util.MockUtil;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.example.chartspringbootsamples.vo.XData;
 import com.z.starter.autoconfig.core.DataInject;
-import com.z.starter.autoconfig.dto.XYDTO;
+import com.z.starter.autoconfig.dto.ChartQuery;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
+
+import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 /**
  * @author zhaoxu
@@ -16,12 +16,13 @@ import java.util.Map;
  * @since
  */
 @Component(value = "testBean")
-public class TestChart implements DataInject {
+@Scope(scopeName=SCOPE_PROTOTYPE)
+public class TestChart implements DataInject<XData> {
 
 
     @Override
-    public Map<String, List<XYDTO>> inject() {
-        //mock Data
-        return MockUtil.getMockMap();
+    public XData injectWithQuery(ChartQuery chartQuery) {
+        System.out.println(chartQuery);
+        return MockUtil.getBaseDataMockMap();
     }
 }

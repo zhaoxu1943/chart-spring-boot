@@ -1,13 +1,10 @@
 package com.z.starter.autoconfig.po;
 
-import com.z.starter.autoconfig.dto.XYDTO;
+import com.z.starter.autoconfig.core.BaseData;
 import lombok.*;
 import lombok.experimental.Accessors;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * page/card focus on page structure
@@ -27,7 +24,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class Chart extends BaseEntity implements Serializable {
+public class Chart<T extends BaseData> extends BaseEntity implements Serializable {
 
 
     @Column
@@ -51,7 +48,6 @@ public class Chart extends BaseEntity implements Serializable {
 
 
     @Transient
-    private Map<String, List<XYDTO>> data;
-
+    private T data;
 
 }

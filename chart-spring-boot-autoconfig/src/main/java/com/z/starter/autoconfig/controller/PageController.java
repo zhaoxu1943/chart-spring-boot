@@ -1,12 +1,9 @@
 package com.z.starter.autoconfig.controller;
 
-import com.google.common.collect.Lists;
 import com.z.starter.autoconfig.config.ResultGenerator;
-import com.z.starter.autoconfig.dto.PageCardDTO;
+import com.z.starter.autoconfig.dto.PageCardQuery;
 import com.z.starter.autoconfig.dto.ResultDTO;
-import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Page;
-import com.z.starter.autoconfig.repository.PageRepository;
 import com.z.starter.autoconfig.service.PageService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -45,14 +42,14 @@ public class PageController {
     /**
      * create page by pageCard DTO
      *
-     * @param pageCardDTO
+     * @param pageCardQuery
      * @return Page
      * @author zhaoxu
      */
     @Operation(summary = "create page by pageCardDTO")
     @PostMapping("/create")
-    public ResultDTO<Page> createPage(@RequestBody PageCardDTO pageCardDTO){
-        return  ResultGenerator.genSuccessResult(pageService.createPage(pageCardDTO));
+    public ResultDTO<Page> createPage(@RequestBody PageCardQuery pageCardQuery){
+        return  ResultGenerator.genSuccessResult(pageService.createPage(pageCardQuery));
     }
 
 

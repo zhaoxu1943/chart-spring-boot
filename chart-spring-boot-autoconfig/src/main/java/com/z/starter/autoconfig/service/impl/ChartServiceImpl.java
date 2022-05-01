@@ -1,26 +1,22 @@
 package com.z.starter.autoconfig.service.impl;
 
-import cn.hutool.db.Db;
-import cn.hutool.db.DbUtil;
-import cn.hutool.db.Entity;
+
+import com.google.common.collect.Lists;
 import com.z.starter.autoconfig.config.ChartException;
+import com.z.starter.autoconfig.core.BaseData;
 import com.z.starter.autoconfig.core.DataInject;
+import com.z.starter.autoconfig.dto.ChartQuery;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Chart;
 import com.z.starter.autoconfig.repository.CardRepository;
 import com.z.starter.autoconfig.repository.ChartRepository;
 import com.z.starter.autoconfig.service.ChartService;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanInitializationException;
-import org.springframework.beans.factory.InitializingBean;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
-import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +36,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
     private ApplicationContext ctx;
 
     @Override
-    public void setApplicationContext(ApplicationContext ctx) throws BeansException {
+    public void setApplicationContext(ApplicationContext ctx) {
          this.ctx = ctx;
     }
 
@@ -59,12 +55,27 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
 
 
     @Override
-    public List<Chart> getChartConfigDataByChartId(List<Long> chartIdList) {
-            return chartRepository.findAllById(chartIdList);
+    public  List<Chart> getChartConfigDataByChartQuery(List<ChartQuery> chartQueryList) {
+        List<Chart> chartList = Lists.newArrayList();
+        for (ChartQuery chartQuery : chartQueryList) {
+            Optional<Chart> chartOptional = chartRepository.findById(chartQuery.getId());
+            if (chartOptional.isPresent()){
+                Chart chart =  chartOptional.get();
+                dataInject(chart,chartQuery);
+                chartList.add(chart);
+            }
+        }
+        return chartList;
+
     }
 
-    @Override
-    public void dataInject(List<Chart> chartList) {
-        chartList.forEach(chart -> chart.setData(ctx.getBean(chart.getBeanName(), DataInject.class).inject()));
-    }
+
+    private <T extends BaseData> void dataInject(Chart<T> chart, ChartQuery chartQuery) {
+            if (StringUtils.isNotBlank(chart.getBeanName())){
+                //invoke constructor
+                DataInject<T> inject = (DataInject<T>) ctx.getBean(chart.getBeanName(),chartQuery);
+                chart.setData(inject.injectWithQuery(chartQuery));
+            }
+        }
+
 }

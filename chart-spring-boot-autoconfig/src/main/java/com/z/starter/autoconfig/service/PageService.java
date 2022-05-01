@@ -1,13 +1,10 @@
 package com.z.starter.autoconfig.service;
 
-import com.z.starter.autoconfig.dto.PageCardDTO;
+import com.z.starter.autoconfig.dto.PageCardQuery;
 import com.z.starter.autoconfig.po.Page;
-
-import java.sql.SQLException;
 
 public interface PageService {
 
-
-  Page createPage(PageCardDTO pageCardDTO);
+  Page createPage(PageCardQuery pageCardQuery);
   Page getPageInfo(String pageName);
 }
