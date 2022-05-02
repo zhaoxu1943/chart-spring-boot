@@ -10,6 +10,7 @@ import java.util.Map;
  * @date 2022/4/27 10:54
  * @since
  */
+@FunctionalInterface
 public interface DataInject<T extends BaseData> {
 
     T injectWithQuery(ChartQuery chartQuery);
