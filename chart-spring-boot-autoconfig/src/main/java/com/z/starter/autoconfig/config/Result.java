@@ -1,7 +1,6 @@
-package com.z.starter.autoconfig.dto;
+package com.z.starter.autoconfig.config;
 
 import cn.hutool.json.JSONUtil;
-import com.z.starter.autoconfig.config.ResultCode;
 
 import java.io.Serializable;
 
@@ -10,16 +9,16 @@ import java.io.Serializable;
  * @date 2022/4/24 14:22
  * @since
  */
-public class ResultDTO<T> implements Serializable {
+public class Result<T> implements Serializable {
     private int code;
     private String message;
     private T data;
 
-    public ResultDTO() {
+    public Result() {
         super();
     }
 
-    public ResultDTO setCode(ResultCode resultCode) {
+    public Result setCode(ResultCode resultCode) {
         this.code = resultCode.getCode();
         return this;
     }
@@ -32,7 +31,7 @@ public class ResultDTO<T> implements Serializable {
         return message;
     }
 
-    public ResultDTO setMessage(String message) {
+    public Result setMessage(String message) {
         this.message = message;
         return this;
     }
@@ -41,7 +40,7 @@ public class ResultDTO<T> implements Serializable {
         return data;
     }
 
-    public ResultDTO setData(T data) {
+    public Result setData(T data) {
         this.data = data;
         return this;
     }

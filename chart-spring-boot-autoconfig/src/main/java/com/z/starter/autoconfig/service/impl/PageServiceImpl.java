@@ -3,7 +3,7 @@ package com.z.starter.autoconfig.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Lists;
 import com.z.starter.autoconfig.config.ChartException;
-import com.z.starter.autoconfig.dto.PageCardQuery;
+import com.z.starter.autoconfig.query.PageCardQuery;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Page;
 import com.z.starter.autoconfig.repository.CardRepository;

@@ -1,8 +1,8 @@
 package com.z.starter.autoconfig.controller;
 
 import com.z.starter.autoconfig.config.ResultGenerator;
-import com.z.starter.autoconfig.dto.PageCardQuery;
-import com.z.starter.autoconfig.dto.ResultDTO;
+import com.z.starter.autoconfig.query.PageCardQuery;
+import com.z.starter.autoconfig.config.Result;
 import com.z.starter.autoconfig.po.Page;
 import com.z.starter.autoconfig.service.PageService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +48,7 @@ public class PageController {
      */
     @Operation(summary = "create page by pageCardDTO")
     @PostMapping("/create")
-    public ResultDTO<Page> createPage(@RequestBody PageCardQuery pageCardQuery){
+    public Result<Page> createPage(@RequestBody PageCardQuery pageCardQuery){
         return  ResultGenerator.genSuccessResult(pageService.createPage(pageCardQuery));
     }
 

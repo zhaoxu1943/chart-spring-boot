@@ -1,6 +1,6 @@
 package com.z.starter.autoconfig.service;
 
-import com.z.starter.autoconfig.dto.PageCardQuery;
+import com.z.starter.autoconfig.query.PageCardQuery;
 import com.z.starter.autoconfig.po.Page;
 
 public interface PageService {

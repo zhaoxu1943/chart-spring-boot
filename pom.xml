@@ -20,7 +20,7 @@
 
     <groupId>com.z</groupId>
     <artifactId>chart-spring-boot</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <name>chart-spring-boot</name>
 
     <description>chart backend with E-chart </description>
@@ -28,7 +28,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <autoconfig.version>0.0.2</autoconfig.version>
+        <autoconfig.version>0.0.3</autoconfig.version>
     </properties>
 
 

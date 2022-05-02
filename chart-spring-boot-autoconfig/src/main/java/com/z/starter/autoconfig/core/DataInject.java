@@ -1,8 +1,6 @@
 package com.z.starter.autoconfig.core;
 
-import com.z.starter.autoconfig.dto.ChartQuery;
-
-import java.util.Map;
+import com.z.starter.autoconfig.query.ChartQuery;
 
 /**
  * inject data to chart

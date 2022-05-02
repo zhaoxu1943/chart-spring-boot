@@ -3,7 +3,7 @@ package com.example.chartspringbootsamples.chartdata;
 import com.example.chartspringbootsamples.util.MockUtil;
 import com.example.chartspringbootsamples.vo.XData;
 import com.z.starter.autoconfig.core.DataInject;
-import com.z.starter.autoconfig.dto.ChartQuery;
+import com.z.starter.autoconfig.query.ChartQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

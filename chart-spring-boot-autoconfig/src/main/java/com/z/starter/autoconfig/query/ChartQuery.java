@@ -1,4 +1,4 @@
-package com.z.starter.autoconfig.dto;
+package com.z.starter.autoconfig.query;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

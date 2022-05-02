@@ -1,4 +1,4 @@
-package com.z.starter.autoconfig.dto;
+package com.z.starter.autoconfig.core;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class XYDTO {
+public class XYAxis {
 
     private String name;
 

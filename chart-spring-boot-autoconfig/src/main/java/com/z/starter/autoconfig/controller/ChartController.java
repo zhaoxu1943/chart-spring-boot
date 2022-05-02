@@ -1,8 +1,8 @@
 package com.z.starter.autoconfig.controller;
 
 import com.z.starter.autoconfig.config.ResultGenerator;
-import com.z.starter.autoconfig.dto.ChartQuery;
-import com.z.starter.autoconfig.dto.ResultDTO;
+import com.z.starter.autoconfig.query.ChartQuery;
+import com.z.starter.autoconfig.config.Result;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Chart;
 import com.z.starter.autoconfig.service.ChartService;
@@ -27,14 +27,14 @@ public class ChartController {
 
     @Operation(summary = "create charts for card by card id")
     @PostMapping("/create-charts-for-card-by-card-id/card-id/{cardId}")
-    public ResultDTO<Card> createChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Chart> chartList){
+    public Result<Card> createChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Chart> chartList){
             return ResultGenerator.genSuccessResult(chartService.createChartsForCardByCardId(cardId,chartList));
 
     }
 
     @Operation(summary = "get chart config data by ChartQuery obj ")
     @PostMapping("/get-chart-config-data")
-    public ResultDTO<List<Chart>> getChartConfigDataByChartQuery(@RequestBody List<ChartQuery> chartQueryList){
+    public Result<List<Chart>> getChartConfigDataByChartQuery(@RequestBody List<ChartQuery> chartQueryList){
         List<Chart> chartList = chartService.getChartConfigDataByChartQuery(chartQueryList);
         return ResultGenerator.genSuccessResult(chartList);
 

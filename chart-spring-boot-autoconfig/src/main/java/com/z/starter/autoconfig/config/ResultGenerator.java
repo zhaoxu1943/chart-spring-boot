@@ -1,7 +1,5 @@
 package com.z.starter.autoconfig.config;
 
-import com.z.starter.autoconfig.dto.ResultDTO;
-
 /**
  * 响应结果生成工具
  * @author zhaoxu
@@ -9,8 +7,8 @@ import com.z.starter.autoconfig.dto.ResultDTO;
 public class ResultGenerator {
     private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
 
-    public static ResultDTO genSuccessResult() {
-        return new ResultDTO()
+    public static Result genSuccessResult() {
+        return new Result()
                 .setCode(ResultCode.SUCCESS)
                 .setMessage(DEFAULT_SUCCESS_MESSAGE);
     }
@@ -21,15 +19,15 @@ public class ResultGenerator {
      * @param
      * @throws
      */
-    public static <T> ResultDTO<T> genSuccessResult(T data) {
-        return new ResultDTO()
+    public static <T> Result<T> genSuccessResult(T data) {
+        return new Result()
                 .setCode(ResultCode.SUCCESS)
                 .setMessage(DEFAULT_SUCCESS_MESSAGE)
                 .setData(data);
     }
 
-    public static ResultDTO genFailResult(String message) {
-        return new ResultDTO()
+    public static Result genFailResult(String message) {
+        return new Result()
                 .setCode(ResultCode.FAIL)
                 .setMessage(message);
     }

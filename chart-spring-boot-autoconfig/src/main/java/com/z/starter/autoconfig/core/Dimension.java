@@ -1,6 +1,5 @@
 package com.z.starter.autoconfig.core;
 
-import com.z.starter.autoconfig.dto.XYDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +21,6 @@ public class Dimension{
 
     private String name;
 
-    private List<XYDTO> xydtoList;
+    private List<XYAxis> XYAxisList;
 
 }

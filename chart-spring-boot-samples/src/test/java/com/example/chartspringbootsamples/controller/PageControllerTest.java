@@ -1,6 +1,6 @@
 package com.example.chartspringbootsamples.controller;
 
-import com.z.starter.autoconfig.dto.PageCardQuery;
+import com.z.starter.autoconfig.query.PageCardQuery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
