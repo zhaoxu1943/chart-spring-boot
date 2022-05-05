@@ -9,6 +9,7 @@ Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 1. 文件夹结构调整,实体更名,使更容易理解
 2. 将DataInject接口重构为函数式接口,其中的inject方法升级为带参数的数据注入方法
 3. 提供BaseData类,作为数据注入的基础模板类
+4. 支持多chart联动:在chart-data接口中请求N个联动链表的chartQuery数组,应用按参数查询即可
 
 - 2022年04月30日 version 0.0.2
 实现chart基础功能,包括
