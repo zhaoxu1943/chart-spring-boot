@@ -4,10 +4,10 @@ server:
 # datasource and connection pool
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/chart
-    username: root
-    password: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.7.212.241:17306/judgeAnalysis
+    username: analysis
+    password: analysis
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5
