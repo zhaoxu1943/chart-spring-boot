@@ -16,8 +16,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class BaseData {
+public class BaseData<T> {
 
+    //图表使用
     protected List<Dimension> dimensionList;
 
+    //普通列表
+    protected List<T> normalTableObjectList;
 }

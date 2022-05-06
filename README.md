@@ -5,6 +5,11 @@ Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 
 ### UPDATE LOG
 
+- 2022年05月06日 version 0.0.5
+1. 支持NORMAL TABLE,客户端例子见ChartDataConfig#testChartData5
+2. 增加配置接口 `create-normal-table-column-config-by-chart-id` 通过chart-id 增加NORMAL_TABLE 的字段配置
+3. //todo 重构代码,增加类型扩展性,目前不符合开放封闭原则
+
 - 2022年05月02日 version 0.0.3
 1. 文件夹结构调整,实体更名,使更容易理解
 2. 将DataInject接口重构为函数式接口,其中的inject方法升级为带参数的数据注入方法

@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.z.starter.autoconfig.config.ChartException;
 import com.z.starter.autoconfig.core.BaseData;
 import com.z.starter.autoconfig.core.DataInject;
+import com.z.starter.autoconfig.po.NormalTableColumnConfig;
 import com.z.starter.autoconfig.query.ChartQuery;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Chart;
@@ -53,6 +54,19 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
         throw new ChartException("create charts for card failed Exception");
     }
 
+
+    @Override
+    @Transactional
+    public Chart createNormalTableColumnConfigByChartId(Long chartId, List<NormalTableColumnConfig> normalTableColumnConfigList) {
+        Optional<Chart> chartOptional = chartRepository.findById(chartId);
+        if (chartOptional.isPresent()){
+            Chart chart = chartOptional.get();
+            chart.setNormalTableColumnConfigList(normalTableColumnConfigList);
+            chartRepository.save(chart);
+            return chart;
+        }
+        throw new ChartException("create charts for card failed Exception");
+    }
 
     @Override
     public  List<Chart> getChartConfigDataByChartQuery(List<ChartQuery> chartQueryList) {

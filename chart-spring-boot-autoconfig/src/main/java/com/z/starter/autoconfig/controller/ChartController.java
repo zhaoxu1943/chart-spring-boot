@@ -1,6 +1,7 @@
 package com.z.starter.autoconfig.controller;
 
 import com.z.starter.autoconfig.config.ResultGenerator;
+import com.z.starter.autoconfig.po.NormalTableColumnConfig;
 import com.z.starter.autoconfig.query.ChartQuery;
 import com.z.starter.autoconfig.config.Result;
 import com.z.starter.autoconfig.po.Card;
@@ -31,6 +32,15 @@ public class ChartController {
             return ResultGenerator.genSuccessResult(chartService.createChartsForCardByCardId(cardId,chartList));
 
     }
+
+
+    @Operation(summary = "create normal table column config by chart id")
+    @PostMapping("/create-normal-table-column-config-by-chart-id/chart-id/{chartId}")
+    public Result<Chart> createNormalTableColumnConfigByChartId(@PathVariable Long chartId , @RequestBody List<NormalTableColumnConfig> normalTableColumnConfigList){
+        return ResultGenerator.genSuccessResult(chartService.createNormalTableColumnConfigByChartId(chartId,normalTableColumnConfigList));
+
+    }
+
 
     @Operation(summary = "get chart config data by ChartQuery obj ")
     @PostMapping("/get-chart-config-data")

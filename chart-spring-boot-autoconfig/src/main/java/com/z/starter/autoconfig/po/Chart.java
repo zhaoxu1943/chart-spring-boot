@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * page/card focus on page structure
@@ -38,6 +39,13 @@ public class Chart<T extends BaseData> extends BaseEntity implements Serializabl
 
     @Column
     private String yAxisName;
+
+
+    @OneToMany(targetEntity = NormalTableColumnConfig.class,cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @JoinTable(name = "plg_relation_chart_column",
+            joinColumns = {@JoinColumn(name = "column_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="chart_id",referencedColumnName = "id")})
+    private List<NormalTableColumnConfig> normalTableColumnConfigList;
 
     /**
      * data bind to the chart object
