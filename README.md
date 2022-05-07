@@ -2,6 +2,16 @@
 
 Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 
+### 如何增加一种chart类型?(after 0.0.6)
+1. 确认该chart类型模型是否和现有chart类型兼容?
+模型包括:和Chart基类相比多出哪些独有属性,DataInject的数据类型
+如果现有数据类型不能支持
+2. 在ChartType枚举类中,添加新的类型
+3. 建立实体类extends Chart,并声明其独有属性
+4. 建立注入数据实体类extends BaseData,并描述其注入的数据类型
+5. 在Card中建立该类型背包(List),并在查询时置入charts数组,供前端方便使用
+
+目前只有step-5涉及修改已有类型Card
 
 ### UPDATE LOG
 
