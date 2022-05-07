@@ -86,7 +86,9 @@ Req create-bars-for-card-by-card-id
          "cardOrder": null,
          "span": 5,
          "cardOffset": 1,
-         "bars": [
+         "bars": null,
+         "normalTables": null,
+         "charts": [
             {
                "id": 2,
                "createTime": "2022-05-07T08:35:26.528+00:00",
@@ -97,9 +99,7 @@ Req create-bars-for-card-by-card-id
                "data": null,
                "xaxisName": "xxx",
                "yaxisName": "yyy"
-            }
-         ],
-         "normalTables": [
+            },
             {
                "id": 3,
                "createTime": "2022-05-07T08:14:05.165+00:00",
@@ -147,8 +147,9 @@ Req create-bars-for-card-by-card-id
          "cardOrder": null,
          "span": 5,
          "cardOffset": 1,
-         "bars": [],
-         "normalTables": []
+         "bars": null,
+         "normalTables": null,
+         "charts": []
       },
       {
          "id": 3,
@@ -160,8 +161,9 @@ Req create-bars-for-card-by-card-id
          "cardOrder": null,
          "span": 5,
          "cardOffset": 1,
-         "bars": [],
-         "normalTables": []
+         "bars": null,
+         "normalTables": null,
+         "charts": []
       }
    ]
 }
