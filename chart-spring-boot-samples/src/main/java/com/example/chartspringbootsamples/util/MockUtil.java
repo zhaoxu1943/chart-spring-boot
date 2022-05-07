@@ -1,10 +1,11 @@
 package com.example.chartspringbootsamples.util;
 
-import com.example.chartspringbootsamples.vo.XData;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.z.starter.autoconfig.core.Dimension;
 import com.z.starter.autoconfig.core.XYAxis;
+import com.z.starter.autoconfig.core.data.BarData;
+
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class MockUtil {
 
 
 
-    public static XData getBaseDataMockMap(){
+    public static BarData getBaseDataMockMap(){
 
         List<Dimension> dimensionList = Lists.newArrayList();
 
@@ -64,10 +65,9 @@ public class MockUtil {
         dimensionList.add(dnsDimension);
         dimensionList.add(httpDimension);
 
-        XData xData = new XData();
-        xData.setDimensionList(dimensionList);
-        xData.setTestParam("123");
-        return xData;
+        BarData barData = new BarData();
+        barData.setDimensionList(dimensionList);
+        return barData;
     }
 
 

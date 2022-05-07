@@ -1,15 +1,11 @@
 package com.z.starter.autoconfig.po;
 
-import cn.hutool.core.date.DateTime;
 import lombok.*;
 import lombok.experimental.Accessors;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +24,10 @@ import java.util.List;
 @Accessors(chain = true)
 public class Card extends BaseEntity implements Serializable {
 
+
+    @Column
+    private ChartType defaultChartType;
+
     @Column
     private Long defaultChartId;
 
@@ -43,10 +43,19 @@ public class Card extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private Integer cardOffset;
 
-    @ManyToMany(targetEntity = Chart.class,cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinTable(name = "plg_relation_card_chart",
+    @ManyToMany(targetEntity = Bar.class,cascade = CascadeType.MERGE)
+    @JoinTable(name = "plg_relation_card_bar_chart",
             joinColumns = {@JoinColumn(name = "card_id",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="chart_id",referencedColumnName = "id")})
-    private List<Chart> charts;
+            inverseJoinColumns = {@JoinColumn(name="bar_chart_id",referencedColumnName = "id")})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Bar> bars;
+
+
+    @ManyToMany(targetEntity = NormalTable.class,cascade = CascadeType.MERGE)
+    @JoinTable(name = "plg_relation_card_normal_table_chart",
+            joinColumns = {@JoinColumn(name = "card_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="normal_table_chart_id",referencedColumnName = "id")})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<NormalTable> normalTables;
 
 }

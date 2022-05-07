@@ -3,14 +3,13 @@ package com.z.starter.autoconfig.service.impl;
 
 import com.google.common.collect.Lists;
 import com.z.starter.autoconfig.config.ChartException;
-import com.z.starter.autoconfig.core.BaseData;
+import com.z.starter.autoconfig.core.data.BaseData;
 import com.z.starter.autoconfig.core.DataInject;
-import com.z.starter.autoconfig.po.NormalTableColumnConfig;
+import com.z.starter.autoconfig.po.*;
 import com.z.starter.autoconfig.query.ChartQuery;
-import com.z.starter.autoconfig.po.Card;
-import com.z.starter.autoconfig.po.Chart;
+import com.z.starter.autoconfig.repository.BarRepository;
 import com.z.starter.autoconfig.repository.CardRepository;
-import com.z.starter.autoconfig.repository.ChartRepository;
+import com.z.starter.autoconfig.repository.NormalTableRepository;
 import com.z.starter.autoconfig.service.ChartService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
@@ -32,7 +31,12 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
     @Resource
     CardRepository cardRepository;
     @Resource
-    ChartRepository chartRepository;
+    BarRepository barRepository;
+    @Resource
+    NormalTableRepository normalTableRepository;
+
+
+
 
     private ApplicationContext ctx;
 
@@ -41,13 +45,25 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
          this.ctx = ctx;
     }
 
+
     @Override
-    @Transactional
-    public Card createChartsForCardByCardId(Long cardId, List<Chart> chartList) {
+    public Card createNormalTablesForCardByCardId(Long cardId, List<NormalTable> normalTableList) {
         Optional<Card> cardOption = cardRepository.findById(cardId);
         if (cardOption.isPresent()){
             Card card = cardOption.get();
-            card.setCharts(chartList);
+            card.setNormalTables(normalTableList);
+            cardRepository.save(card);
+            return card;
+        }
+        throw new ChartException("create charts for card failed Exception");
+    }
+
+    @Override
+    public Card createBarsForCardByCardId(Long cardId, List<Bar> barList) {
+        Optional<Card> cardOption = cardRepository.findById(cardId);
+        if (cardOption.isPresent()){
+            Card card = cardOption.get();
+            card.setBars(barList);
             cardRepository.save(card);
             return card;
         }
@@ -55,28 +71,29 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
     }
 
 
-    @Override
-    @Transactional
-    public Chart createNormalTableColumnConfigByChartId(Long chartId, List<NormalTableColumnConfig> normalTableColumnConfigList) {
-        Optional<Chart> chartOptional = chartRepository.findById(chartId);
-        if (chartOptional.isPresent()){
-            Chart chart = chartOptional.get();
-            chart.setNormalTableColumnConfigList(normalTableColumnConfigList);
-            chartRepository.save(chart);
-            return chart;
-        }
-        throw new ChartException("create charts for card failed Exception");
-    }
+
 
     @Override
     public  List<Chart> getChartConfigDataByChartQuery(List<ChartQuery> chartQueryList) {
         List<Chart> chartList = Lists.newArrayList();
         for (ChartQuery chartQuery : chartQueryList) {
-            Optional<Chart> chartOptional = chartRepository.findById(chartQuery.getId());
-            if (chartOptional.isPresent()){
-                Chart chart =  chartOptional.get();
-                dataInject(chart,chartQuery);
-                chartList.add(chart);
+            ChartType chartType = chartQuery.getChartType();
+            if (ChartType.BAR.equals(chartType)){
+                Optional<Bar> chartOptional = barRepository.findById(chartQuery.getId());
+                if (chartOptional.isPresent()){
+                    Chart chart =  chartOptional.get();
+                    dataInject(chart,chartQuery);
+                    chartList.add(chart);
+                }
+            }else if (ChartType.NORMAL_TABLE.equals(chartType)){
+                Optional<NormalTable> chartOptional = normalTableRepository.findById(chartQuery.getId());
+                if (chartOptional.isPresent()){
+                    Chart chart =  chartOptional.get();
+                    dataInject(chart,chartQuery);
+                    chartList.add(chart);
+                }
+            }else {
+                throw new ChartException("传入不支持的图表类型");
             }
         }
         return chartList;

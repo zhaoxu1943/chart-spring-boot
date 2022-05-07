@@ -1,5 +1,6 @@
 package com.z.starter.autoconfig.query;
 
+import com.z.starter.autoconfig.po.ChartType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ import java.util.Map;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class ChartQuery {
+
+    private ChartType chartType;
 
     private Long id;
 
