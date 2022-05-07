@@ -1,9 +1,8 @@
 package com.z.starter.autoconfig.service;
 
-import com.z.starter.autoconfig.po.NormalTableColumnConfig;
+import com.z.starter.autoconfig.po.*;
 import com.z.starter.autoconfig.query.ChartQuery;
-import com.z.starter.autoconfig.po.Card;
-import com.z.starter.autoconfig.po.Chart;
+
 import java.util.List;
 
 /**
@@ -14,9 +13,9 @@ import java.util.List;
 public interface ChartService {
 
 
-    Card createChartsForCardByCardId(Long cardId, List<Chart> chartList);
-
     List<Chart> getChartConfigDataByChartQuery(List<ChartQuery> chartQueryList);
 
-    Chart createNormalTableColumnConfigByChartId(Long chartId, List<NormalTableColumnConfig> normalTableColumnConfigList);
+    Card createNormalTablesForCardByCardId(Long cardId, List<NormalTable> normalTableList);
+
+    Card createBarsForCardByCardId(Long cardId, List<Bar> barList);
 }

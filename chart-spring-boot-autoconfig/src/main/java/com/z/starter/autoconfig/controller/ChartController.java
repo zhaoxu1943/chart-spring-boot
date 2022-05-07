@@ -1,11 +1,9 @@
 package com.z.starter.autoconfig.controller;
 
 import com.z.starter.autoconfig.config.ResultGenerator;
-import com.z.starter.autoconfig.po.NormalTableColumnConfig;
+import com.z.starter.autoconfig.po.*;
 import com.z.starter.autoconfig.query.ChartQuery;
 import com.z.starter.autoconfig.config.Result;
-import com.z.starter.autoconfig.po.Card;
-import com.z.starter.autoconfig.po.Chart;
 import com.z.starter.autoconfig.service.ChartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,18 +24,18 @@ public class ChartController {
     @Resource
     ChartService chartService;
 
-    @Operation(summary = "create charts for card by card id")
-    @PostMapping("/create-charts-for-card-by-card-id/card-id/{cardId}")
-    public Result<Card> createChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Chart> chartList){
-            return ResultGenerator.genSuccessResult(chartService.createChartsForCardByCardId(cardId,chartList));
+    @Operation(summary = "create Bars For Card By CardId")
+    @PostMapping("/create-bars-for-card-by-card-id/card-id/{cardId}")
+    public Result<Card> createBarsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Bar> barList){
+            return ResultGenerator.genSuccessResult(chartService.createBarsForCardByCardId(cardId,barList));
 
     }
 
 
-    @Operation(summary = "create normal table column config by chart id")
-    @PostMapping("/create-normal-table-column-config-by-chart-id/chart-id/{chartId}")
-    public Result<Chart> createNormalTableColumnConfigByChartId(@PathVariable Long chartId , @RequestBody List<NormalTableColumnConfig> normalTableColumnConfigList){
-        return ResultGenerator.genSuccessResult(chartService.createNormalTableColumnConfigByChartId(chartId,normalTableColumnConfigList));
+    @Operation(summary = "create Normal Tables For Card By CardId")
+    @PostMapping("/create-normal-tables-for-card-by-card-id/card-id/{cardId}")
+    public Result<Card> createNormalTablesForCardByCardId(@PathVariable Long cardId , @RequestBody List<NormalTable> normalTableList){
+        return ResultGenerator.genSuccessResult(chartService.createNormalTablesForCardByCardId(cardId,normalTableList));
 
     }
 

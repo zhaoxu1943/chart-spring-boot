@@ -1,5 +1,6 @@
 package com.z.starter.autoconfig.core;
 
+import com.z.starter.autoconfig.core.data.BaseData;
 import com.z.starter.autoconfig.query.ChartQuery;
 
 /**

@@ -5,6 +5,303 @@ Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 
 ### UPDATE LOG
 
+- 2022年05月07日 version 0.0.6
+1. 依据OCP,将代码重构
+
+原因: 两类图表BAR,NORMAL_TABLE的独有属性(x,y轴,普通图表的表头)杂糅在chart实体中,如果出现第三种图表将更难以扩展
+
+修改内容:
+
+后端:
+
+1.将为card创建chart一分为二,去掉原来的统一添加接口,变为
+create-bars-for-card-by-card-id与create-normal-tables-for-card-by-card-id,
+即根据CardID创建bars集合与根据CardID创建normal-table集合,创建完成如json结构所示
+单一的card中将拥有多个集合,以后出现第N种类型后,添加一个新的集合即可
+该card可以显示的chart为所有种类chart集合的并集
+
+Req create-normal-tables-for-card-by-card-id
+```json
+[{
+		"type": "NORMAL_TABLE",
+		"title": "testTitle",
+		"beanName": "testNormal1",
+		"normalTableColumnConfigList": [{
+				"columnKey": "name",
+				"columnChineseName": "姓名"
+			},
+			{
+				"columnKey": "age",
+				"columnChineseName": "年龄"
+			}
+
+		]
+
+	}
+
+]
+```
+
+Req create-bars-for-card-by-card-id
+
+```json
+[{
+		"type": "BAR",
+		"title": "testTitle",
+		"beanName": "testBar1",
+		"xaxisName" :"xxx",
+        "yaxisName" :"yyy"
+
+	}
+
+]
+```
+
+
+```json
+{
+   "id": 1,
+   "createTime": "2022-05-07T08:00:16.526+00:00",
+   "updateTime": "2022-05-07T08:00:16.526+00:00",
+   "numberOfCutPage": null,
+   "name": "alarm3",
+   "cards": [
+      {
+         "id": 1,
+         "createTime": "2022-05-07T08:00:16.490+00:00",
+         "updateTime": "2022-05-07T08:35:26.538+00:00",
+         "defaultChartType": null,
+         "defaultChartId": null,
+         "title": null,
+         "cardOrder": null,
+         "span": 5,
+         "cardOffset": 1,
+         "bars": [
+            {
+               "id": 2,
+               "createTime": "2022-05-07T08:35:26.528+00:00",
+               "updateTime": "2022-05-07T08:35:26.528+00:00",
+               "title": "testTitle",
+               "type": "BAR",
+               "beanName": "testBar1",
+               "data": null,
+               "xaxisName": "xxx",
+               "yaxisName": "yyy"
+            }
+         ],
+         "normalTables": [
+            {
+               "id": 3,
+               "createTime": "2022-05-07T08:14:05.165+00:00",
+               "updateTime": "2022-05-07T08:14:05.197+00:00",
+               "title": "testTitle",
+               "type": "NORMAL_TABLE",
+               "beanName": "testNormal1",
+               "data": null,
+               "normalTableColumnConfigList": [
+                  {
+                     "id": 3,
+                     "createTime": "2022-05-07T08:14:05.173+00:00",
+                     "updateTime": "2022-05-07T08:14:05.173+00:00",
+                     "columnKey": "name",
+                     "columnChineseName": "姓名",
+                     "columnEnglishName": null,
+                     "hide": false,
+                     "sortable": false,
+                     "sortDirection": null,
+                     "columnOrder": null
+                  },
+                  {
+                     "id": 4,
+                     "createTime": "2022-05-07T08:14:05.182+00:00",
+                     "updateTime": "2022-05-07T08:14:05.182+00:00",
+                     "columnKey": "age",
+                     "columnChineseName": "年龄",
+                     "columnEnglishName": null,
+                     "hide": false,
+                     "sortable": false,
+                     "sortDirection": null,
+                     "columnOrder": null
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": 2,
+         "createTime": "2022-05-07T08:00:16.506+00:00",
+         "updateTime": "2022-05-07T08:00:16.506+00:00",
+         "defaultChartType": null,
+         "defaultChartId": null,
+         "title": null,
+         "cardOrder": null,
+         "span": 5,
+         "cardOffset": 1,
+         "bars": [],
+         "normalTables": []
+      },
+      {
+         "id": 3,
+         "createTime": "2022-05-07T08:00:16.513+00:00",
+         "updateTime": "2022-05-07T08:00:16.513+00:00",
+         "defaultChartType": null,
+         "defaultChartId": null,
+         "title": null,
+         "cardOrder": null,
+         "span": 5,
+         "cardOffset": 1,
+         "bars": [],
+         "normalTables": []
+      }
+   ]
+}
+```
+
+2. 相应的将BaseData的继承拆分为BarData和NormalTableData,注入例子见ChartDataConfig
+3. 实体修改,chart对象不以实体存在,作为chart类实体的抽象存在,维护chart的共有属性,如title,data等
+
+前端使用:
+
+上述配置均由后端初始化好即可,前端使用区别:chart的获取
+
+1. default chart 的获取
+之前仅靠ID获取card的default chart,现在需要后端同时维护好default chart的 chartType,供前端使用
+
+2. chart data-config的获取
+chartType为必传,当然返回值也会分的很清,BAR除了基础属性只有xy轴,TABLE除了基础属性只有表头
+除此之外,data中也分清了,bar只有维度list,而table只有对象list
+```json
+
+[
+
+{
+    "id": 1,
+    "chartType":"BAR"
+},
+{
+    "id": 3,
+    "chartType":"NORMAL_TABLE"
+}
+
+]
+```
+
+```json
+{
+    "code": 200,
+    "message": "SUCCESS",
+    "data": [
+        {
+            "id": 1,
+            "createTime": "2022-05-07T08:13:41.233+00:00",
+            "updateTime": "2022-05-07T08:13:41.233+00:00",
+            "title": "testTitle",
+            "type": "BAR",
+            "beanName": "testBar1",
+            "data": {
+                "dimensionList": [
+                    {
+                        "name": "DNS",
+                        "xyaxisList": [
+                            {
+                                "name": "10.1.1.1",
+                                "value": "22"
+                            },
+                            {
+                                "name": "10.1.1.2",
+                                "value": "122"
+                            },
+                            {
+                                "name": "10.1.1.3",
+                                "value": "222"
+                            },
+                            {
+                                "name": "10.1.1.4",
+                                "value": "222"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "HTTP",
+                        "xyaxisList": [
+                            {
+                                "name": "10.1.1.1",
+                                "value": "221"
+                            },
+                            {
+                                "name": "10.1.1.2",
+                                "value": "122"
+                            },
+                            {
+                                "name": "10.1.1.3",
+                                "value": "222"
+                            },
+                            {
+                                "name": "10.1.1.4",
+                                "value": "222"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "xaxisName": null,
+            "yaxisName": null
+        },
+        {
+            "id": 3,
+            "createTime": "2022-05-07T08:14:05.165+00:00",
+            "updateTime": "2022-05-07T08:14:05.197+00:00",
+            "title": "testTitle",
+            "type": "NORMAL_TABLE",
+            "beanName": "testNormal1",
+            "data": {
+                "normalTableObjectList": [
+                    {
+                        "name": "张三",
+                        "age": 2
+                    },
+                    {
+                        "name": "李五",
+                        "age": 20
+                    }
+                ]
+            },
+            "normalTableColumnConfigList": [
+                {
+                    "id": 3,
+                    "createTime": "2022-05-07T08:14:05.173+00:00",
+                    "updateTime": "2022-05-07T08:14:05.173+00:00",
+                    "columnKey": "name",
+                    "columnChineseName": "姓名",
+                    "columnEnglishName": null,
+                    "hide": false,
+                    "sortable": false,
+                    "sortDirection": null,
+                    "columnOrder": null
+                },
+                {
+                    "id": 4,
+                    "createTime": "2022-05-07T08:14:05.182+00:00",
+                    "updateTime": "2022-05-07T08:14:05.182+00:00",
+                    "columnKey": "age",
+                    "columnChineseName": "年龄",
+                    "columnEnglishName": null,
+                    "hide": false,
+                    "sortable": false,
+                    "sortDirection": null,
+                    "columnOrder": null
+                }
+            ]
+        }
+    ]
+}
+```
+
+
+
+
+
+-----
 - 2022年05月06日 version 0.0.5
 1. 支持NORMAL TABLE,客户端例子见ChartDataConfig#testChartData5
 2. 增加配置接口 `create-normal-table-column-config-by-chart-id` 通过chart-id 增加NORMAL_TABLE 的字段配置

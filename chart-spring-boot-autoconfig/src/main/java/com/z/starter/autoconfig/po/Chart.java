@@ -1,11 +1,10 @@
 package com.z.starter.autoconfig.po;
 
-import com.z.starter.autoconfig.core.BaseData;
+import com.z.starter.autoconfig.core.data.BaseData;
 import lombok.*;
 import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * page/card focus on page structure
@@ -17,14 +16,8 @@ import java.util.List;
  * @date 2022/4/21 16:57
  * @since
  */
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-@Entity
-@Table(name = "plg_chart")
+@MappedSuperclass
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Accessors(chain = true)
 public class Chart<T extends BaseData> extends BaseEntity implements Serializable {
 
 
@@ -34,26 +27,12 @@ public class Chart<T extends BaseData> extends BaseEntity implements Serializabl
     @Column
     private ChartType type;
 
-    @Column
-    private String xAxisName;
-
-    @Column
-    private String yAxisName;
-
-
-    @OneToMany(targetEntity = NormalTableColumnConfig.class,cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinTable(name = "plg_relation_chart_column",
-            joinColumns = {@JoinColumn(name = "column_id",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name="chart_id",referencedColumnName = "id")})
-    private List<NormalTableColumnConfig> normalTableColumnConfigList;
 
     /**
      * data bind to the chart object
      */
-
     @Column()
     private String beanName;
-
 
     @Transient
     private T data;
