@@ -3,6 +3,7 @@ package com.z.starter.autoconfig.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Lists;
 import com.z.starter.autoconfig.config.ChartException;
+import com.z.starter.autoconfig.po.Chart;
 import com.z.starter.autoconfig.query.PageCardQuery;
 import com.z.starter.autoconfig.po.Card;
 import com.z.starter.autoconfig.po.Page;
@@ -56,6 +57,16 @@ public class PageServiceImpl implements PageService {
 
     @Override
     public Page getPageInfo(String pageName) {
-        return pageRepository.findByName(pageName);
+        Page page = pageRepository.findByName(pageName);
+        List<Card> cardList= page.getCards();
+        cardList.forEach(card -> {
+            List<Chart> chartList = Lists.newArrayList();
+            chartList.addAll(card.getBars());
+            chartList.addAll(card.getNormalTables());
+            card.setCharts(chartList);
+            card.setNormalTables(null);
+            card.setBars(null);
+        });
+        return page;
     }
 }

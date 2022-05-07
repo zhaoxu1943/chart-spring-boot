@@ -58,4 +58,7 @@ public class Card extends BaseEntity implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<NormalTable> normalTables;
 
+
+    @Transient
+    private List<Chart> charts;
 }
