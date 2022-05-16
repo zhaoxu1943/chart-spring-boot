@@ -15,6 +15,11 @@ Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 
 ### UPDATE LOG
 
+- 2022年05月16日 version 0.0.7
+1. 将page和card 改为N:N关系
+2. 现在可以创建空的page(无card关联),供数据库配置N:N关系
+
+
 - 2022年05月07日 version 0.0.6
 1. 依据OCP,将代码重构
 
