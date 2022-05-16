@@ -51,6 +51,13 @@ public class PageServiceImpl implements PageService {
                 pageRepository.save(page);
                 return page;
             }
+        }else{
+            String pageName = pageCardQuery.getPageName();
+            if(StrUtil.isNotBlank(pageName)){
+                Page page = new Page().setName(pageName);
+                pageRepository.save(page);
+                return page;
+            }
         }
             throw new ChartException("IllegalArgument in PageCardDTO");
     }
