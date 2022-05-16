@@ -47,7 +47,10 @@ public class PageServiceImpl implements PageService {
             }
             String pageName = pageCardQuery.getPageName();
             if(StrUtil.isNotBlank(pageName)){
-                Page page = new Page().setName(pageName).setCards(cardList);
+                Page page = new Page()
+                        .setName(pageName)
+                        .setNumberOfCutPage(pageCardQuery.getNumberOfCutPage())
+                        .setCards(cardList);
                 pageRepository.save(page);
                 return page;
             }

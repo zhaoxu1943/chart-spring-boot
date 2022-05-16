@@ -1,5 +1,6 @@
 package com.z.starter.autoconfig.query;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ import lombok.experimental.Accessors;
 public class PageCardQuery {
 
     private String pageName;
+
+    private Integer numberOfCutPage;
 
     private Integer cardNumber;
 
