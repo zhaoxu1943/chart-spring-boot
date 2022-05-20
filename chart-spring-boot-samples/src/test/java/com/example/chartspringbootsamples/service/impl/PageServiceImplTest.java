@@ -4,6 +4,7 @@ import com.example.chartspringbootsamples.base.BaseTest;
 import com.z.starter.autoconfig.po.Page;
 import com.z.starter.autoconfig.query.PageCardQuery;
 import com.z.starter.autoconfig.service.PageService;
+import com.z.starter.autoconfig.vo.PageVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,9 +32,9 @@ class PageServiceImplTest extends BaseTest {
         assertThat(pageSaved).isNotNull();
         assertEquals(pageSaved.getName(),TEST_PAGE_NAME_3);
 
-        Page pageQuery  = pageService.getPageInfo(TEST_PAGE_NAME_3);
-        assertThat(pageQuery).isNotNull();
-        assertEquals(pageQuery.getName(),TEST_PAGE_NAME_3);
+        PageVO pageVOQuery  = pageService.getPageInfo(TEST_PAGE_NAME_3);
+        assertThat(pageVOQuery).isNotNull();
+        assertEquals(pageVOQuery.getName(),TEST_PAGE_NAME_3);
     }
 
 }

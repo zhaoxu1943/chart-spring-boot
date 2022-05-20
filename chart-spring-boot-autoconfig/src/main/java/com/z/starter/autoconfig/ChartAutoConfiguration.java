@@ -26,10 +26,6 @@ public class ChartAutoConfiguration {
     @Resource
     ChartProperties chartProperties;
 
-    @Bean(name = "chartStatus")
-    public void getEnabled(){
-        System.out.println(chartProperties.isEnabled());
-    }
 
 
 

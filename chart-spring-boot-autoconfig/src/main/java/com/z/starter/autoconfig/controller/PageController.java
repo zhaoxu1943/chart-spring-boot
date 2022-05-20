@@ -3,6 +3,7 @@ package com.z.starter.autoconfig.controller;
 import com.z.starter.autoconfig.query.PageCardQuery;
 import com.z.starter.autoconfig.po.Page;
 import com.z.starter.autoconfig.service.PageService;
+import com.z.starter.autoconfig.vo.PageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +27,12 @@ public class PageController {
      * query page info with the given page name
      * include cards info
      * @param pageName
-     * @return Page
+     * @return PageVO 供前端使用
      * @author zhaoxu
      */
     @Operation(summary = "get page info by page name")
     @GetMapping("/page-name/{pageName}")
-    public Page getPageInfo(@PathVariable String pageName){
+    public PageVO getPageInfo(@PathVariable String pageName){
         return pageService.getPageInfo(pageName);
 
     }

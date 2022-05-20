@@ -8,6 +8,8 @@ import com.z.starter.autoconfig.query.PageCardQuery;
 import com.z.starter.autoconfig.repository.CardRepository;
 import com.z.starter.autoconfig.repository.PageRepository;
 import com.z.starter.autoconfig.service.PageService;
+import com.z.starter.autoconfig.util.VOMapUtil;
+import com.z.starter.autoconfig.vo.PageVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,28 +66,11 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public Page getPageInfo(String pageName) {
+    public PageVO getPageInfo(String pageName) {
         Optional<Page> pageOptional = pageRepository.findByName(pageName);
         if (pageOptional.isPresent()){
             Page page = pageOptional.get();
-            List<Card> cardList= page.getCards();
-            cardList.forEach(card -> {
-                List<Chart> chartList = Lists.newArrayList();
-                List<Bar> bars =  card.getBars();
-                List<NormalTable> normalTables = card.getNormalTables();
-                if (bars!=null){
-                    chartList.addAll(bars);
-                }
-                if (normalTables!=null){
-                    //addAll throw NPE
-                    //NullPointerException – if the specified collection contains one or more null elements and this list does not permit null elements, or if the specified collection is null
-                    chartList.addAll(normalTables);
-                }
-                card.setCharts(chartList);
-                card.setNormalTables(null);
-                card.setBars(null);
-            });
-            return page;
+            return VOMapUtil.pageToPageVO(page);
         }
         throw new ChartException("Cant find page by given pageName!");
     }

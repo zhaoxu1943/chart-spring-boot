@@ -59,6 +59,4 @@ public class Card extends BaseEntity implements Serializable {
     private List<NormalTable> normalTables;
 
 
-    @Transient
-    private List<Chart> charts;
 }

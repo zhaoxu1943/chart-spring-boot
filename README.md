@@ -16,8 +16,18 @@ Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 ### UPDATE LOG
 
 - 2022年05月20日 version 0.0.8
-1. 完善单元测试,达到 86% classes, 76% lines (jacoco report)
+1. 完善单元测试,覆盖率:88% classes, 70% lines (jacoco report)
 2. 增加全局异常处理,全局返回值处理
+
+应用后端无修改
+前端修改:
+1. `page-info/page-name/{name}` 接口增加Result封装,之前漏掉了
+2. `page-info/page-name/{name}` 接口中cards数组不再含有无关属性
+
+BUG修复:
+1. 不再会使主应用启动时打印true了
+
+
 
 - 2022年05月16日 version 0.0.7
 1. 将page和card 改为N:N关系
