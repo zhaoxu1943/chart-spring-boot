@@ -16,6 +16,7 @@ import java.io.Serializable;
  * @date 2022/4/21 16:57
  * @since
  */
+@EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
 @Data
 public class Chart<T extends BaseData> extends BaseEntity implements Serializable {
@@ -26,7 +27,6 @@ public class Chart<T extends BaseData> extends BaseEntity implements Serializabl
 
     @Column
     private ChartType type;
-
 
     /**
      * data bind to the chart object

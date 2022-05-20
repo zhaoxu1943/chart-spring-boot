@@ -2,6 +2,8 @@ package com.z.starter.autoconfig.repository;
 
 import com.z.starter.autoconfig.po.Page;
 
+import java.util.Optional;
+
 /**
  * @author zhaoxu
  * @date 2022/4/25 15:00
@@ -9,5 +11,5 @@ import com.z.starter.autoconfig.po.Page;
  */
 public interface PageRepository extends BaseRepository<Page,Long> {
 
-    Page findByName(String name);
+    Optional<Page> findByName(String name);
 }

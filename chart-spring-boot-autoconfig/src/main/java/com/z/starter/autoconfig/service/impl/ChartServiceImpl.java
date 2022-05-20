@@ -15,8 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +55,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
             cardRepository.save(card);
             return card;
         }
-        throw new ChartException("create charts for card failed Exception");
+        throw new ChartException("Cant find page by given cardId!");
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
             cardRepository.save(card);
             return card;
         }
-        throw new ChartException("create charts for card failed Exception");
+        throw new ChartException("Cant find page by given cardId!");
     }
 
 
@@ -81,7 +81,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
             if (ChartType.BAR.equals(chartType)){
                 Optional<Bar> chartOptional = barRepository.findById(chartQuery.getId());
                 if (chartOptional.isPresent()){
-                    Chart chart =  chartOptional.get();
+                    Bar chart =  chartOptional.get();
                     dataInject(chart,chartQuery);
                     chartList.add(chart);
                 }
@@ -93,7 +93,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
                     chartList.add(chart);
                 }
             }else {
-                throw new ChartException("传入不支持的图表类型");
+                throw new ChartException("Unsupported chart type!");
             }
         }
         return chartList;
@@ -102,11 +102,18 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
 
 
     private <T extends BaseData> void dataInject(Chart<T> chart, ChartQuery chartQuery) {
-            if (StringUtils.isNotBlank(chart.getBeanName())){
-                //invoke constructor
-                DataInject<T> inject = (DataInject<T>) ctx.getBean(chart.getBeanName(),chartQuery);
-                chart.setData(inject.injectWithQuery(chartQuery));
-            }
+        String chartDataBeanName = chart.getBeanName();
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        if (StringUtils.isNotBlank(chartDataBeanName)){
+                if (Arrays.asList(beanNames).contains(chartDataBeanName)) {
+                    DataInject<T> inject = (DataInject<T>) ctx.getBean(chart.getBeanName(),chartQuery);
+                    chart.setData(inject.injectWithQuery(chartQuery));
+                }else{
+                    throw new ChartException("Cant find bean:beanName="+chartDataBeanName+" in ioc container!");
+                }
+            }else{
+            throw new ChartException("chart:id="+chart.getId()+"beanName is empty");
+        }
         }
 
 }

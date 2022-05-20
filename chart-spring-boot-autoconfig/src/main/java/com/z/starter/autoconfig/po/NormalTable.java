@@ -19,12 +19,11 @@ import java.util.List;
 public class NormalTable extends Chart{
 
 
-
-    @OneToMany(targetEntity = NormalTableColumnConfig.class,cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = NormalTableColumn.class,cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(name = "plg_relation_normal_table_chart_column",
             joinColumns = {@JoinColumn(name = "column_id",referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="normal_table_chart_id",referencedColumnName = "id")})
-    private List<NormalTableColumnConfig> normalTableColumnConfigList;
+    private List<NormalTableColumn> normalTableColumnList;
 
 
 

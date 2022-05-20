@@ -19,7 +19,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "plg_page")
+@Table(name = "plg_page",uniqueConstraints=@UniqueConstraint(columnNames = {"name"}))
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

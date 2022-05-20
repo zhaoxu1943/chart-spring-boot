@@ -22,7 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class NormalTableColumnConfig extends BaseEntity implements Serializable {
+public class NormalTableColumn extends BaseEntity implements Serializable {
 
     @Column
     private String columnKey;

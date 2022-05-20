@@ -28,6 +28,12 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class PageControllerTest {
 
 
+    private static final String TEST_PAGE_NAME_1 = "alarm";
+
+    private static final PageCardQuery testQuery1 = new PageCardQuery().setPageName(TEST_PAGE_NAME_1).setCardNumber(6).setCardOffset(1).setCardSpan(8).setNumberOfCutPage(2);
+
+
+
     //inject the random port
     @LocalServerPort
     private int port;
@@ -39,14 +45,13 @@ public class PageControllerTest {
 
 
     @Test
-    public void createPageShouldReturnPageObj() throws Exception{
-
-
+    public void createPageShouldReturnPageObj() {
         //RequestBody
-        HttpEntity<PageCardQuery> request = new HttpEntity<>(new PageCardQuery().setPageName("alarm").setCardNumber(6).setCardOffset(1).setCardSpan(8));
+        HttpEntity<PageCardQuery> request = new HttpEntity<>(testQuery1);
 
         String json =  this.testRestTemplate.postForObject("http://localhost:"+port+"/page-info/create",request,
                 String.class);
+
         assertThat(json).isNotNull();
     }
 

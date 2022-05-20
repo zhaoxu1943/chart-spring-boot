@@ -2,7 +2,6 @@ package com.z.starter.autoconfig.po;
 
 import lombok.*;
 import lombok.experimental.Accessors;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

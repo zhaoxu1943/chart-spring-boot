@@ -26,25 +26,24 @@ public class ChartController {
 
     @Operation(summary = "create Bars For Card By CardId")
     @PostMapping("/create-bars-for-card-by-card-id/card-id/{cardId}")
-    public Result<Card> createBarsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Bar> barList){
-            return ResultGenerator.genSuccessResult(chartService.createBarsForCardByCardId(cardId,barList));
+    public Card createBarsForCardByCardId(@PathVariable Long cardId , @RequestBody List<Bar> barList){
+            return chartService.createBarsForCardByCardId(cardId,barList);
 
     }
 
 
     @Operation(summary = "create Normal Tables For Card By CardId")
     @PostMapping("/create-normal-tables-for-card-by-card-id/card-id/{cardId}")
-    public Result<Card> createNormalTablesForCardByCardId(@PathVariable Long cardId , @RequestBody List<NormalTable> normalTableList){
-        return ResultGenerator.genSuccessResult(chartService.createNormalTablesForCardByCardId(cardId,normalTableList));
+    public Card createNormalTablesForCardByCardId(@PathVariable Long cardId , @RequestBody List<NormalTable> normalTableList){
+        return chartService.createNormalTablesForCardByCardId(cardId,normalTableList);
 
     }
 
 
     @Operation(summary = "get chart config data by ChartQuery obj ")
     @PostMapping("/get-chart-config-data")
-    public Result<List<Chart>> getChartConfigDataByChartQuery(@RequestBody List<ChartQuery> chartQueryList){
-        List<Chart> chartList = chartService.getChartConfigDataByChartQuery(chartQueryList);
-        return ResultGenerator.genSuccessResult(chartList);
+    public List<Chart> getChartConfigDataByChartQuery(@RequestBody List<ChartQuery> chartQueryList){
+        return chartService.getChartConfigDataByChartQuery(chartQueryList);
 
     }
 }
