@@ -9,6 +9,7 @@ import com.z.starter.autoconfig.po.*;
 import com.z.starter.autoconfig.query.ChartQuery;
 import com.z.starter.autoconfig.repository.BarRepository;
 import com.z.starter.autoconfig.repository.CardRepository;
+import com.z.starter.autoconfig.repository.NormalChartRepository;
 import com.z.starter.autoconfig.repository.NormalTableRepository;
 import com.z.starter.autoconfig.service.ChartService;
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +35,8 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
     BarRepository barRepository;
     @Resource
     NormalTableRepository normalTableRepository;
+    @Resource
+    NormalChartRepository normalChartRepository;
 
 
 
@@ -55,7 +58,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
             cardRepository.save(card);
             return card;
         }
-        throw new ChartException("Cant find page by given cardId!");
+        throw new ChartException("Cant find card by given cardId!");
     }
 
     @Override
@@ -67,11 +70,21 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
             cardRepository.save(card);
             return card;
         }
-        throw new ChartException("Cant find page by given cardId!");
+        throw new ChartException("Cant find card by given cardId!");
     }
 
 
-
+    @Override
+    public Card createNormalChartsForCardByCardId(Long cardId, List<NormalChart> normalChartList) {
+        Optional<Card> cardOption = cardRepository.findById(cardId);
+        if (cardOption.isPresent()){
+            Card card = cardOption.get();
+            card.setNormalCharts(normalChartList);
+            cardRepository.save(card);
+            return card;
+        }
+        throw new ChartException("Cant find card by given cardId!");
+    }
 
     @Override
     public  List<Chart> getChartConfigDataByChartQuery(List<ChartQuery> chartQueryList) {
@@ -92,7 +105,14 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
                     dataInject(chart,chartQuery);
                     chartList.add(chart);
                 }
-            }else {
+            }else if (ChartType.NORMAL_CHART.equals(chartType)){
+                Optional<NormalChart> chartOptional = normalChartRepository.findById(chartQuery.getId());
+                if (chartOptional.isPresent()){
+                    Chart chart =  chartOptional.get();
+                    dataInject(chart,chartQuery);
+                    chartList.add(chart);
+                }
+            } else {
                 throw new ChartException("Unsupported chart type!");
             }
         }

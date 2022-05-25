@@ -18,4 +18,6 @@ public interface ChartService {
     Card createNormalTablesForCardByCardId(Long cardId, List<NormalTable> normalTableList);
 
     Card createBarsForCardByCardId(Long cardId, List<Bar> barList);
+
+    Card createNormalChartsForCardByCardId(Long cardId, List<NormalChart> normalChartList);
 }

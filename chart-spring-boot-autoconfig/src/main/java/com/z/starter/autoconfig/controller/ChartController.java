@@ -40,6 +40,14 @@ public class ChartController {
     }
 
 
+    @Operation(summary = "create Normal Charts For Card By CardId")
+    @PostMapping("/create-normal-charts-for-card-by-card-id/card-id/{cardId}")
+    public Card createNormalChartsForCardByCardId(@PathVariable Long cardId , @RequestBody List<NormalChart> normalChartList){
+        return chartService.createNormalChartsForCardByCardId(cardId,normalChartList);
+
+    }
+
+
     @Operation(summary = "get chart config data by ChartQuery obj ")
     @PostMapping("/get-chart-config-data")
     public List<Chart> getChartConfigDataByChartQuery(@RequestBody List<ChartQuery> chartQueryList){

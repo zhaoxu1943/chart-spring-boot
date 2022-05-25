@@ -45,6 +45,90 @@ class ChartServiceImplTest extends BaseTest {
     @Test
     void createNormalTablesAndCreateBarsAndQuery() {
 
+        //create
+
+        //create normal tables for card_0
+
+        Card card_0 = createNormalTablesForCard();
+
+        //create bars for card_0
+
+        createBarsForCard();
+
+        //create normal charts
+
+        createNormalChartsForCard();
+
+
+        //query
+
+
+        // get id list
+
+        List<Long> barIdList = card_0.getBars().stream().map(BaseEntity::getId).collect(Collectors.toList());
+
+        List<Long> normalTableIdList = card_0.getNormalTables().stream().map(BaseEntity::getId).collect(Collectors.toList());
+
+        List<Long> normalChartIdList = card_0.getNormalCharts().stream().map(BaseEntity::getId).collect(Collectors.toList());
+
+
+
+        //query map for bar
+        Map<String,String> queryMap = Maps.newHashMap();
+        queryMap.put("key5","value5");
+        queryMap.put("key6","value6");
+        ChartQuery chartQuery = new ChartQuery().setChartType(ChartType.BAR).setId(barIdList.get(0)).setQueryMap(queryMap);
+
+        //query map for normal table
+        Map<String,String> queryMap1 = Maps.newHashMap();
+        queryMap1.put("key1","value1");
+        queryMap1.put("key2","value2");
+        ChartQuery chartQuery1 = new ChartQuery().setChartType(ChartType.NORMAL_TABLE).setId(normalTableIdList.get(0)).setQueryMap(queryMap1);
+
+        //query map for normal chart
+        Map<String,String> queryMap2 = Maps.newHashMap();
+        queryMap2.put("key11","value11");
+        queryMap2.put("key22","value22");
+        ChartQuery chartQuery2 = new ChartQuery().setChartType(ChartType.NORMAL_CHART).setId(normalChartIdList.get(0)).setQueryMap(queryMap2);
+
+        // create query list
+        List<ChartQuery> chartQueryList = Lists.newArrayList();
+        chartQueryList.add(chartQuery);
+        chartQueryList.add(chartQuery1);
+        chartQueryList.add(chartQuery2);
+
+
+        List<Chart> charts = chartService.getChartConfigDataByChartQuery(chartQueryList);
+        assertThat(charts).isNotNull();
+        assertThat(charts.size()).isEqualTo(3);
+        System.out.println(charts);
+    }
+
+    private void createNormalChartsForCard() {
+
+        List<NormalChart> normalChartList = Lists.newArrayList();
+
+        NormalChart normalChart1 = new NormalChart();
+        normalChart1.setTitle("normal_chart_test_user");
+        normalChart1.setBeanName("testNormalChart1");
+        normalChart1.setType(ChartType.NORMAL_CHART);
+
+
+        normalChartList.add(normalChart1);
+
+        NormalChart normalChart2 = new NormalChart();
+        normalChart2.setTitle("normal_chart_test_user");
+        normalChart2.setBeanName("testNormalChart1");
+        normalChart2.setType(ChartType.NORMAL_CHART);
+
+
+        normalChartList.add(normalChart2);
+
+        chartService.createNormalChartsForCardByCardId(cardId,normalChartList);
+
+    }
+
+    private Card createNormalTablesForCard() {
         List<NormalTable> normalTableList = Lists.newArrayList();
 
         NormalTable normalTable = new NormalTable();
@@ -62,7 +146,6 @@ class ChartServiceImplTest extends BaseTest {
         normalTableList.add(normalTable);
 
 
-
         NormalTable normalTable2 = new NormalTable();
         normalTable2.setTitle("normalTableTest_good");
         normalTable2.setBeanName("testNormal1");
@@ -78,9 +161,10 @@ class ChartServiceImplTest extends BaseTest {
         normalTable2.setNormalTableColumnList(columnList2);
         normalTableList.add(normalTable2);
 
-        Card card1 = chartService.createNormalTablesForCardByCardId(cardId,normalTableList);
+        return chartService.createNormalTablesForCardByCardId(cardId,normalTableList);
+    }
 
-
+    private Card createBarsForCard() {
         List<Bar> barList = Lists.newArrayList();
 
         Bar bar = new Bar();
@@ -101,36 +185,7 @@ class ChartServiceImplTest extends BaseTest {
 
 
         Card card2 = chartService.createBarsForCardByCardId(cardId,barList);
-
-
-        List<Long> barIdList = card2.getBars().stream().filter(card->card.getType().equals(ChartType.BAR)).map(BaseEntity::getId).collect(Collectors.toList());
-
-        List<Long> normalTableIdList = card2.getNormalTables().stream().filter(card->card.getType().equals(ChartType.NORMAL_TABLE)).map(BaseEntity::getId).collect(Collectors.toList());
-
-
-        //query
-        Map<String,String> queryMap = Maps.newHashMap();
-        queryMap.put("key5","value5");
-        queryMap.put("key6","value6");
-
-        ChartQuery chartQuery = new ChartQuery().setChartType(ChartType.BAR).setId(barIdList.get(0)).setQueryMap(queryMap);
-
-        Map<String,String> queryMap1 = Maps.newHashMap();
-        queryMap1.put("key1","value1");
-        queryMap1.put("key2","value2");
-
-        ChartQuery chartQuery1 = new ChartQuery().setChartType(ChartType.NORMAL_TABLE).setId(normalTableIdList.get(0)).setQueryMap(queryMap1);
-
-        List<ChartQuery> chartQueryList = Lists.newArrayList();
-
-        chartQueryList.add(chartQuery);
-        chartQueryList.add(chartQuery1);
-
-        List<Chart> charts = chartService.getChartConfigDataByChartQuery(chartQueryList);
-
-        assertThat(charts).isNotNull();
-        assertThat(charts.size()).isEqualTo(2);
-        System.out.println(charts);
+        return card2;
     }
 
 

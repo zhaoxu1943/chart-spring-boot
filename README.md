@@ -2,18 +2,44 @@
 
 Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 
-### 如何增加一种chart类型?(after 0.0.6)
+### 如何增加一种chart类型?(方法论 at v0.0.6)(实践 at v0.0.9)
+方法论:
 1. 确认该chart类型模型是否和现有chart类型兼容?
 模型包括:和Chart基类相比多出哪些独有属性,DataInject的数据类型
 如果现有数据类型不能支持
-2. 在ChartType枚举类中,添加新的类型
+2. 在ChartType枚举类中,添加新的类型,为新的类型建立一套创建接口(controller-service-repository)
 3. 建立实体类extends Chart,并声明其独有属性
 4. 建立注入数据实体类extends BaseData,并描述其注入的数据类型
-5. 在Card中建立该类型背包(List),并在查询时置入charts数组,供前端方便使用
-
+5. 在Card中建立该类型背包(List),VOMapUtil添加到CardVO:charts的转换即可
+6. 在getChartConfigDataByChartQuery中配置新的类型的注入
 目前只有step-5涉及修改已有类型Card
 
+实践:
+需求中需要添加一种结构,它有着一个图形,一些key-value值组成,此图形也可以看作Map中一个属性
+1. 与现有的Chart基类有结构上的区别吗?
+没有,现在CHART模块也并无基础CHART的实现,所以在此称之为`NORMAL_CHART`
+2. 有适合的Data注入基类吗?
+没有,需要增加Map注入类
+
+故操作方式:
+1. 在`ChartType.java`中增加`NORMAL_CHART`,为新的类型建立一套创建接口(controller-service-repository)
+2. 结构创建:创建`NormalChart extends Chart`,但无额外属性
+3. 数据注入创建: 创建`NormalChartData extends BaseData`,创建Map型数据
+4. 在Card中建立该类型背包`List<NormalChart> normalCharts`,并处理Card与CardVO的转换
+5. 在getChartConfigDataByChartQuery中配置新的类型的注入
+6. 完善新的单元测试
+
+测试后: 该类型提供了一个chart基类,没有额外属性的chart都可以用该Normal_chart来承载,
+它没有额外结构属性,但同样可以接收queryMap
+比如时间控件,也可以使用它承载
+
 ### UPDATE LOG
+
+- 2022年05月25日 version 0.0.9
+1. 增加新的类型`NORMAL_CHART`,对应Data注入结构:`Map`适配以下几种图表
+- 它没有独特的结构属性,仅作为一个抽象性图表的载体,向后端传queryMap,后端响应Map供前端显示
+- 插件的载体,同样无独特的结构属性,只需要生成如时间信息,放置到多个queryMap中实现图表联动
+
 
 - 2022年05月20日 version 0.0.8
 1. 完善单元测试,覆盖率:88% classes, 70% lines (jacoco report)

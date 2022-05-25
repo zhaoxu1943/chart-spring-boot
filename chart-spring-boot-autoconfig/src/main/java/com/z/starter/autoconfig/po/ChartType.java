@@ -9,5 +9,6 @@ public enum ChartType {
 
     BAR,
     PIE,
-    NORMAL_TABLE
+    NORMAL_TABLE,
+    NORMAL_CHART
 }

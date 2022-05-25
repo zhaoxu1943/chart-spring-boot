@@ -3,13 +3,16 @@ package com.example.chartspringbootsamples.chartdata;
 import com.example.chartspringbootsamples.po.Person;
 import com.example.chartspringbootsamples.util.MockUtil;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.z.starter.autoconfig.core.DataInject;
 import com.z.starter.autoconfig.core.data.BarData;
+import com.z.starter.autoconfig.core.data.NormalChartData;
 import com.z.starter.autoconfig.core.data.NormalTableData;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -47,6 +50,20 @@ public class ChartDataConfig {
     }
 
 
+    @Bean(name = "testNormalChart1")
+    public DataInject<NormalChartData> testNormalChart1(){
+        return (chartQuery -> {
+            NormalChartData normalChartData = new NormalChartData();
+            System.out.println(chartQuery);
+            Map<String,String> dataMap = Maps.newHashMap();
+            dataMap.put("imaPath","/test/path");
+            dataMap.put("labelKey","source");
+            dataMap.put("labelName","设备来源");
+            dataMap.put("labelValue","12");
+            normalChartData.setDataMap(dataMap);
+            return normalChartData;
+        });
+    }
 
 
 }

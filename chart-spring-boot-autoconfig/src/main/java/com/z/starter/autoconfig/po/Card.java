@@ -59,4 +59,11 @@ public class Card extends BaseEntity implements Serializable {
     private List<NormalTable> normalTables;
 
 
+    @ManyToMany(targetEntity = NormalChart.class,cascade = CascadeType.MERGE)
+    @JoinTable(name = "plg_relation_card_normal_chart",
+            joinColumns = {@JoinColumn(name = "card_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="normal_chart_id",referencedColumnName = "id")})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<NormalChart> normalCharts;
+
 }

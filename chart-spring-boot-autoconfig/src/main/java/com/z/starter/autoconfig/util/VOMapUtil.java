@@ -30,21 +30,44 @@ public class VOMapUtil {
         if (card!=null) {
             CardVO cardVO = new CardVO();
             List<Chart> chartList = Lists.newArrayList();
-                List<Bar> bars =  card.getBars();
-                List<NormalTable> normalTables = card.getNormalTables();
-                if (bars!=null){
-                    chartList.addAll(bars);
-                }
-                if (normalTables!=null){
-                    //addAll throw NPE
-                    //NullPointerException – if the specified collection contains one or more null elements and this list does not permit null elements, or if the specified collection is null
-                    chartList.addAll(normalTables);
-                }
-                cardVO.setCharts(chartList);
+            processBars(card, chartList);
+            processNormalTable(card, chartList);
+            processNormalChart(card, chartList);
+            //add more processors
+            //...
+            cardVO.setCharts(chartList);
                 BeanUtil.copyProperties(card,cardVO,"bars","normalTables");
                 return cardVO;
         }
         throw new ChartException("Card is null");
     }
 
+
+
+
+
+    private static void processBars(Card card, List<Chart> chartList) {
+        List<Bar> bars =  card.getBars();
+        if (bars!=null){
+            chartList.addAll(bars);
+        }
+    }
+
+    private static void processNormalTable(Card card, List<Chart> chartList) {
+        List<NormalTable> normalTables = card.getNormalTables();
+        if (normalTables!=null){
+            //addAll throw NPE
+            //NullPointerException – if the specified collection contains one or more null elements and this list does not permit null elements, or if the specified collection is null
+            chartList.addAll(normalTables);
+        }
+    }
+
+    private static void processNormalChart(Card card, List<Chart> chartList) {
+        List<NormalChart> normalCharts = card.getNormalCharts();
+        if (normalCharts!=null){
+            //addAll throw NPE
+            //NullPointerException – if the specified collection contains one or more null elements and this list does not permit null elements, or if the specified collection is null
+            chartList.addAll(normalCharts);
+        }
+    }
 }
