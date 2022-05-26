@@ -12,6 +12,7 @@ import com.z.starter.autoconfig.repository.CardRepository;
 import com.z.starter.autoconfig.repository.NormalChartRepository;
 import com.z.starter.autoconfig.repository.NormalTableRepository;
 import com.z.starter.autoconfig.service.ChartService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -27,6 +28,7 @@ import java.util.Optional;
  * @since
  */
 @Service
+@Slf4j
 public class ChartServiceImpl implements ChartService, ApplicationContextAware {
 
     @Resource
@@ -90,6 +92,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
     public  List<Chart> getChartConfigDataByChartQuery(List<ChartQuery> chartQueryList) {
         List<Chart> chartList = Lists.newArrayList();
         for (ChartQuery chartQuery : chartQueryList) {
+
             ChartType chartType = chartQuery.getChartType();
             if (ChartType.BAR.equals(chartType)){
                 Optional<Bar> chartOptional = barRepository.findById(chartQuery.getId());
@@ -129,10 +132,10 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
                     DataInject<T> inject = (DataInject<T>) ctx.getBean(chart.getBeanName(),chartQuery);
                     chart.setData(inject.injectWithQuery(chartQuery));
                 }else{
-                    throw new ChartException("Cant find bean:beanName="+chartDataBeanName+" in ioc container!");
+                    log.error("Cant find bean:beanName="+chartDataBeanName+" in ioc container!");
                 }
             }else{
-            throw new ChartException("chart:id="+chart.getId()+"beanName is empty");
+            log.warn("chart:id="+chart.getId()+"beanName is empty");
         }
         }
 

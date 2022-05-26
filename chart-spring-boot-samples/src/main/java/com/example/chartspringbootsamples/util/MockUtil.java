@@ -5,7 +5,10 @@ import com.google.common.collect.Maps;
 import com.z.starter.autoconfig.core.Dimension;
 import com.z.starter.autoconfig.core.XYAxis;
 import com.z.starter.autoconfig.core.data.BarData;
+import com.z.starter.autoconfig.query.ChartQuery;
+import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +18,12 @@ import java.util.Map;
  * @since
  */
 public class MockUtil {
+    @Data
+    public static class QueryTest {
+        String name;
+
+        List<String> list;
+    }
 
     public static Map<String, List<XYAxis>> getMockMap(){
         //mock Data
@@ -68,6 +77,18 @@ public class MockUtil {
         BarData barData = new BarData();
         barData.setDimensionList(dimensionList);
         return barData;
+    }
+
+    public static void MockChartQuery(ChartQuery chartQuery){
+        Map<String,Object> conditions = Maps.newHashMap();
+        conditions.put("test_arr",new int[]{1,2,3});
+        QueryTest queryTest = new QueryTest();
+        queryTest.setName("test_name");
+        queryTest.list = new ArrayList<>();
+        queryTest.list.add("test_list_1");
+        queryTest.list.add("test_list_2");
+        conditions.put("test_obj",queryTest);
+        chartQuery.setQueryMap(conditions);
     }
 
 

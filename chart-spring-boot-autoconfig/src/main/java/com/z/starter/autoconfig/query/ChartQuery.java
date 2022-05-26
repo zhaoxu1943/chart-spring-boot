@@ -23,5 +23,5 @@ public class ChartQuery {
 
     private Long id;
 
-    private Map<String,String> queryMap;
+    private Map<String,Object> queryMap;
 }
