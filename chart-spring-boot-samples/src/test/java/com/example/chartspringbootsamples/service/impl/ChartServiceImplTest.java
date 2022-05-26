@@ -1,6 +1,7 @@
 package com.example.chartspringbootsamples.service.impl;
 
 import com.example.chartspringbootsamples.base.BaseTest;
+import com.example.chartspringbootsamples.util.MockUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.z.starter.autoconfig.po.*;
@@ -8,19 +9,21 @@ import com.z.starter.autoconfig.query.ChartQuery;
 import com.z.starter.autoconfig.query.PageCardQuery;
 import com.z.starter.autoconfig.service.ChartService;
 import com.z.starter.autoconfig.service.PageService;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Slf4j
 class ChartServiceImplTest extends BaseTest {
-
 
 
     private static final String TEST_PAGE_NAME_2 = "alarm2";
@@ -37,7 +40,7 @@ class ChartServiceImplTest extends BaseTest {
 
     @BeforeEach
     void createPageAndCardForTest() {
-        Page pageSaved  = pageService.createPage(testQuery2);
+        Page pageSaved = pageService.createPage(testQuery2);
         cardId = pageSaved.getCards().get(0).getId();
         System.out.println(pageSaved);
     }
@@ -72,23 +75,22 @@ class ChartServiceImplTest extends BaseTest {
         List<Long> normalChartIdList = card_0.getNormalCharts().stream().map(BaseEntity::getId).collect(Collectors.toList());
 
 
-
         //query map for bar
-        Map<String,String> queryMap = Maps.newHashMap();
-        queryMap.put("key5","value5");
-        queryMap.put("key6","value6");
+        Map<String, Object> queryMap = Maps.newHashMap();
+        queryMap.put("key5", "value5");
+        queryMap.put("key6", "value6");
         ChartQuery chartQuery = new ChartQuery().setChartType(ChartType.BAR).setId(barIdList.get(0)).setQueryMap(queryMap);
 
         //query map for normal table
-        Map<String,String> queryMap1 = Maps.newHashMap();
-        queryMap1.put("key1","value1");
-        queryMap1.put("key2","value2");
+        Map<String, Object> queryMap1 = Maps.newHashMap();
+        queryMap1.put("key1", "value1");
+        queryMap1.put("key2", "value2");
         ChartQuery chartQuery1 = new ChartQuery().setChartType(ChartType.NORMAL_TABLE).setId(normalTableIdList.get(0)).setQueryMap(queryMap1);
 
         //query map for normal chart
-        Map<String,String> queryMap2 = Maps.newHashMap();
-        queryMap2.put("key11","value11");
-        queryMap2.put("key22","value22");
+        Map<String, Object> queryMap2 = Maps.newHashMap();
+        queryMap2.put("key11", "value11");
+        queryMap2.put("key22", "value22");
         ChartQuery chartQuery2 = new ChartQuery().setChartType(ChartType.NORMAL_CHART).setId(normalChartIdList.get(0)).setQueryMap(queryMap2);
 
         // create query list
@@ -124,7 +126,7 @@ class ChartServiceImplTest extends BaseTest {
 
         normalChartList.add(normalChart2);
 
-        chartService.createNormalChartsForCardByCardId(cardId,normalChartList);
+        chartService.createNormalChartsForCardByCardId(cardId, normalChartList);
 
     }
 
@@ -161,7 +163,7 @@ class ChartServiceImplTest extends BaseTest {
         normalTable2.setNormalTableColumnList(columnList2);
         normalTableList.add(normalTable2);
 
-        return chartService.createNormalTablesForCardByCardId(cardId,normalTableList);
+        return chartService.createNormalTablesForCardByCardId(cardId, normalTableList);
     }
 
     private Card createBarsForCard() {
@@ -184,9 +186,22 @@ class ChartServiceImplTest extends BaseTest {
         barList.add(bar2);
 
 
-        Card card2 = chartService.createBarsForCardByCardId(cardId,barList);
+        Card card2 = chartService.createBarsForCardByCardId(cardId, barList);
         return card2;
     }
 
+    @Test
+    public void query_map_trans() {
+        ChartQuery chartQuery = new ChartQuery();
+
+        MockUtil.MockChartQuery(chartQuery);
+
+        int[] testArr = (int[]) chartQuery.getQueryMap().get("test_arr");
+        Assertions.assertArrayEquals(new int[]{1, 2, 3}, testArr);
+
+        MockUtil.QueryTest map = (MockUtil.QueryTest) chartQuery.getQueryMap().get("test_obj");
+        Assertions.assertEquals("test_name", map.getName());
+        Assertions.assertLinesMatch(Lists.newArrayList("test_list_1", "test_list_2"), map.getList());
+    }
 
 }

@@ -92,6 +92,7 @@ public class ChartServiceImpl implements ChartService, ApplicationContextAware {
     public  List<Chart> getChartConfigDataByChartQuery(List<ChartQuery> chartQueryList) {
         List<Chart> chartList = Lists.newArrayList();
         for (ChartQuery chartQuery : chartQueryList) {
+
             ChartType chartType = chartQuery.getChartType();
             if (ChartType.BAR.equals(chartType)){
                 Optional<Bar> chartOptional = barRepository.findById(chartQuery.getId());
