@@ -55,12 +55,26 @@ public class ChartDataConfig {
         return (chartQuery -> {
             NormalChartData normalChartData = new NormalChartData();
             System.out.println(chartQuery);
-            Map<String,String> dataMap = Maps.newHashMap();
-            dataMap.put("imaPath","/test/path");
-            dataMap.put("labelKey","source");
-            dataMap.put("labelName","设备来源");
-            dataMap.put("labelValue","12");
-            normalChartData.setDataMap(dataMap);
+
+            List<Map<String,Object>> mapList = Lists.newArrayList();
+
+            Map<String,Object> dataMap1 = Maps.newHashMap();
+            dataMap1.put("imaPath","/test/path");
+            dataMap1.put("labelKey","source");
+            dataMap1.put("labelName","设备来源");
+            dataMap1.put("labelValue","12");
+
+
+            Map<String,Object> dataMap2 = Maps.newHashMap();
+            dataMap2.put("imaPath","/test/path");
+            dataMap2.put("labelKey","source");
+            dataMap2.put("labelName","设备来源");
+            dataMap2.put("labelValue","12");
+
+            mapList.add(dataMap2);
+            mapList.add(dataMap1);
+
+            normalChartData.setDataMapList(mapList);
             return normalChartData;
         });
     }

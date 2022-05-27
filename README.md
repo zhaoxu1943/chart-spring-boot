@@ -34,6 +34,12 @@ Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 比如时间控件,也可以使用它承载
 
 ### UPDATE LOG
+- 2022年05月27日 version 0.0.10
+各类chart统一修改:
+1. 将 chartQuery对象改为 Map<String,Object>,可传数组
+普通图表(NORMAL_CHART)修改:
+2. 将注入数据类型改为 List<Map<String,Object>>,即map列表
+
 
 - 2022年05月25日 version 0.0.9
 1. 增加新的类型`NORMAL_CHART`,对应Data注入结构:`Map`适配以下几种图表

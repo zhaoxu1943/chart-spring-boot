@@ -2,11 +2,12 @@ package com.z.starter.autoconfig.core.data;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 @Data
 public class NormalChartData extends BaseData{
 
-    protected Map<String,String> dataMap;
+    protected List<Map<String,Object>> dataMapList;
 
 }
