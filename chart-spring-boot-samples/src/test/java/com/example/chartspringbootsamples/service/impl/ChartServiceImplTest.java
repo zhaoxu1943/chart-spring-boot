@@ -138,8 +138,8 @@ class ChartServiceImplTest extends BaseTest {
         normalTable.setBeanName("testNormal1");
         normalTable.setType(ChartType.NORMAL_TABLE);
 
-        NormalTableColumn name = new NormalTableColumn().setColumnKey("name").setColumnChineseName("姓名");
-        NormalTableColumn age = new NormalTableColumn().setColumnKey("age").setColumnChineseName("年龄");
+        NormalTableColumn name = new NormalTableColumn().setColumnKey("name").setColumnChineseName("姓名").setColumnWidth(2);
+        NormalTableColumn age = new NormalTableColumn().setColumnKey("age").setColumnChineseName("年龄").setColumnWidth(3);
         List<NormalTableColumn> columnList = new ArrayList<>();
 
         columnList.add(name);

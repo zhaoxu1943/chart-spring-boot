@@ -45,4 +45,7 @@ public class NormalTableColumn extends BaseEntity implements Serializable {
     @Column
     private Integer columnOrder;
 
+    @Column
+    private Integer columnWidth;
+
 }

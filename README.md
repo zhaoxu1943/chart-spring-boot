@@ -34,6 +34,16 @@ Chart Spring-boot-Starter will help you to create/use/modify charts on websites
 比如时间控件,也可以使用它承载
 
 ### UPDATE LOG
+- 2022年06月10日 version 0.0.11
+`NormalTable`独有属性`List<NormalTableColumn>`,即字段配置列表中,
+添加属性`columnWidth` 列宽
+
+修改:
+1.后端如果预置了NormalTable配置,sql可能需要修改一下
+2.前后端需要协商下`columnWidth`单位,现在仅是一个Integer类型数字
+
+
+
 - 2022年05月27日 version 0.0.10
 各类chart统一修改:
 1. 将 chartQuery对象改为 Map<String,Object>,可传数组
